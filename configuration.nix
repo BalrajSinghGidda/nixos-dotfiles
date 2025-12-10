@@ -120,7 +120,7 @@
       feh
       ];
 
-  fonts.enableFontDir = true;
+  fonts.fontDir.enable = true;
 
   fonts.packages = with pkgs; [
     nerd-fonts.jetbrains-mono

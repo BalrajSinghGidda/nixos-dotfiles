@@ -63,7 +63,7 @@
   programs.firefox.enable = true;
 
   boot.kernelModules = [
-    "dell-wmi"
+      "dell-wmi"
       "dell-wmi-sysman"
       "dell-smbios"
       "dell-wmi-descriptor"
@@ -95,7 +95,6 @@
       neovim
       zellij
       tmux
-#      onlyoffice-desktopeditors
       picom
       rofi
       redis
@@ -115,7 +114,6 @@
       bluez
       xclip
       xcb-util-cursor
-#      onlyoffice-desktopeditors
       libreoffice
       feh
       ];

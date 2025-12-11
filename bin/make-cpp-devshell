@@ -1,0 +1,97 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+usage() {
+  cat <<EOF
+Usage: $(basename "$0") <project-name>
+
+Creates a folder <project-name> with a flake exposing a C++ devshell.
+Includes gcc, clang, cmake, ninja, gdb, ccache, pkg-config, boost.
+
+Example:
+  make-cpp-devshell mycppproj
+EOF
+  exit 1
+}
+
+if [ $# -lt 1 ]; then usage; fi
+
+proj="$1"
+
+if [ -d "$proj" ]; then
+  echo "error: directory '$proj' already exists" >&2
+  exit 1
+fi
+
+mkdir -p "$proj"
+cd "$proj"
+
+# write .envrc (direnv + hide diff + use flake)
+cat > .envrc <<'EOF'
+export DIRENV_HIDE_ENV_DIFF=1
+use flake
+EOF
+
+# write README
+cat > README.md <<EOF
+# $proj (C++ devshell)
+
+Enter the shell with:
+
+\`\`\`
+nix develop .#cpp
+\`\`\`
+
+Typical build steps:
+
+\`\`\`
+cmake -S . -B build -G Ninja
+cmake --build build
+\`\`\`
+EOF
+
+# generate flake.nix
+cat > flake.nix <<'EOF'
+{
+  description = "Dev shell: C++ (cmake, ninja, gcc/clang)";
+
+  inputs = {
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
+    flake-utils.url = "github:numtide/flake-utils";
+  };
+
+  outputs = { self, nixpkgs, flake-utils, ... }:
+    flake-utils.lib.eachDefaultSystem (system:
+      let
+        pkgs = import nixpkgs { inherit system; };
+      in {
+        devShells.default = pkgs.mkShell {
+            name = "cpp-devshell";
+            buildInputs = [
+              pkgs.gcc
+              pkgs.clang
+              pkgs.cmake
+              pkgs.ninja
+              pkgs.gdb
+              pkgs.ccache
+              pkgs.pkg-config
+              pkgs.boost
+            ];
+            nativeBuildInputs = [ pkgs.stdenv.cc ];
+            shellHook = ''
+              export CC=gcc
+              export CXX=g++
+              clear
+              echo "🔧 C++ devshell ready — gcc/clang, cmake, ninja, gdb, ccache"
+            '';
+          };
+      });
+}
+EOF
+
+git init -q
+git add -A
+git commit -qm "init: cpp devshell" || true
+
+echo "Created C++ devshell project '$proj'."
+echo "cd $proj && direnv allow && nix develop .#cpp"

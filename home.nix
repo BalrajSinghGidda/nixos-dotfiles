@@ -2,7 +2,7 @@
 
 let
   dotfiles = "${config.home.homeDirectory}/nixos-dotfiles/config";
-  bin = "${config.home.homeDirectory}/bin";
+  bin = "${config.home.homeDirectory}/nixos-dotfiles/bin";
   create_symlink = path: config.lib.file.mkOutOfStoreSymlink path;
   configs = {
     nvim = "nvim";

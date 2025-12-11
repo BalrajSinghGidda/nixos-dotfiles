@@ -23,7 +23,7 @@ in
     shellAliases = {
       nc = "nvim ~/nixos-dotfiles/.";
       btw = "echo I use NixOS, btw";
-      nrs = "sudo nixos-rebuild switch --flake ~/nixos-dotfiles/#nixos-btw";
+      nrs = "sudo nixos-rebuild switch --flake ~/nixos-dotfiles/#nixos-server-btw";
       edit-config = "nvim ~/nixos-dotfiles/configuration.nix";
       edit-home-config = "nvim ~/nixos-dotfiles/home.nix";
       make-py-devshell = "bash ${bin}/make-py-devshell";

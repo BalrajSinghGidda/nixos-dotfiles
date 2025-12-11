@@ -9,7 +9,7 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "nixos-btw";
+  networking.hostName = "nixos-server-btw";
   networking.networkmanager.enable = true;
 
   time.timeZone = "Asia/Kolkata";
@@ -33,8 +33,6 @@
   nixpkgs.config.allowUnfree = true;
 
   services.printing.enable = true;
-
-  services.printing.drivers = [ pkgs.cnijfilter2 ];
 
   services.pipewire = {
     enable = true;
@@ -62,14 +60,14 @@
 
   programs.firefox.enable = true;
 
-  boot.kernelModules = [
-      "dell-wmi"
-      "dell-wmi-sysman"
-      "dell-smbios"
-      "dell-wmi-descriptor"
-      "video"
-      "sparse-keymap"
-  ];
+#  boot.kernelModules = [
+#      "dell-wmi"
+#      "dell-wmi-sysman"
+#      "dell-smbios"
+#      "dell-wmi-descriptor"
+#      "video"
+#      "sparse-keymap"
+#  ];
 
   systemd.user.services.mpris-proxy = {
     description = "Mpris proxy";
@@ -85,7 +83,7 @@
   };
 
   environment.systemPackages = with pkgs; [
-    vim
+      vim
       wget
       nitch
       git

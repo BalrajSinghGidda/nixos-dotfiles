@@ -1,16 +1,16 @@
 { config, pkgs, ... }:
 
 let
-  dotfiles = "${config.home.homeDirectory}/nixos-dotfiles/config";
-  bin = "${config.home.homeDirectory}/nixos-dotfiles/bin";
-  create_symlink = path: config.lib.file.mkOutOfStoreSymlink path;
-  configs = {
-    nvim = "nvim";
-    qtile = "qtile";
-    rofi = "rofi";
-    picom = "picom";
-    kitty = "kitty";
-  };
+dotfiles = "${config.home.homeDirectory}/nixos-dotfiles/config";
+bin = "${config.home.homeDirectory}/nixos-dotfiles/bin";
+create_symlink = path: config.lib.file.mkOutOfStoreSymlink path;
+configs = {
+  nvim = "nvim";
+  qtile = "qtile";
+  rofi = "rofi";
+  picom = "picom";
+  kitty = "kitty";
+};
 in
 
 {
@@ -20,6 +20,8 @@ in
 
   programs.bash = {
     enable = true;
+    bashmount.enable = true;
+    enableCompletion = true;
     shellAliases = {
       nc = "nvim ~/nixos-dotfiles/.";
       btw = "echo I use NixOS, btw";
@@ -30,7 +32,12 @@ in
       make-cpp-devshell = "bash ${bin}/make-cpp-devshell";
       ls = "eza --long -ahF --no-user --no-permissions --git --icons=always --color=always --grid";
       cd = "z";
+      bm = "bashmount";
     };
+    historyIgnore = [
+      "ls"
+      "exit"
+    ];
     bashrcExtra = ''
       export PS1="\[\e[38;5;75m\]\u@\h \[\e[38;5;113m\]\w \[\e[38;5;189m\]\$ \[\e[0m\]"
       export MANPAGER="nvim +Man!"
@@ -38,8 +45,9 @@ in
       eval "$(direnv hook bash)"
       eval "$(zoxide init bash)"
       nitch
-    '';
+      '';
   };
+
 
   programs.git = {
     enable = true;
@@ -53,7 +61,7 @@ in
       enable = true; 
       hosts = [
         "https://github.com"
-        "https://gist.github.com"
+          "https://gist.github.com"
       ];
     };
     settings = {
@@ -76,10 +84,10 @@ in
 
   xdg.configFile = builtins.mapAttrs
     (name: subpath: {
-      source = create_symlink "${dotfiles}/${subpath}";
-      recursive = true;
-    })
-    configs;
+     source = create_symlink "${dotfiles}/${subpath}";
+     recursive = true;
+     })
+  configs;
 
 #  xdg.configFile."qtile" = {
 #   source = create_symlink "${dotfiles}/qtile"; 
@@ -107,5 +115,5 @@ in
       eza
       zoxide
       python313Packages.euporie
-      ];
+  ];
 }

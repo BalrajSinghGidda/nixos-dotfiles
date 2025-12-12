@@ -36,6 +36,10 @@
 
   services.printing.drivers = [ pkgs.cnijfilter2 ];
 
+  programs.bash.completion.enable = true;
+  programs.bash.blesh.enable = true;
+
+
   services.pipewire = {
     enable = true;
     pulse.enable = true;
@@ -102,6 +106,8 @@
       oh-my-posh
       brightnessctl
       pamixer
+      udisks2
+      eject
       direnv
       libnotify
       dunst

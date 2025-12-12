@@ -20,6 +20,8 @@ in
 
   programs.bash = {
     enable = true;
+    bashmount.enable = true;
+    enableCompletion = true;
     shellAliases = {
       nc = "nvim ~/nixos-dotfiles/.";
       btw = "echo I use NixOS, btw";
@@ -30,13 +32,19 @@ in
       make-cpp-devshell = "bash ${bin}/make-cpp-devshell";
       ls = "eza --long -ahF --no-user --no-permissions --git --icons=always --color=always --grid";
       cd = "z";
+      bm = "bashmount";
     };
+    historyIgnore = [
+      "ls"
+      "exit"
+    ];
     bashrcExtra = ''
       export PS1="\[\e[38;5;75m\]\u@\h \[\e[38;5;113m\]\w \[\e[38;5;189m\]\$ \[\e[0m\]"
       export MANPAGER="nvim +Man!"
       export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow'
       eval "$(direnv hook bash)"
       eval "$(zoxide init bash)"
+      export POSH_SESSION_ID="5019232b-7132-4b5d-a914-4ddc9b73b2a3";source $'/home/balraj/.cache/oh-my-posh/init.8949049596678462984.sh'
       nitch
     '';
   };

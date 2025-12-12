@@ -48,6 +48,9 @@
 
   services.flatpak.enable = true;
 
+  programs.bash.completion.enable = true;
+  programs.bash.blesh.enable = true;
+
   services.tailscale.enable = true;
 
   users.users.balraj = {
@@ -102,6 +105,8 @@
       pamixer
       direnv
       libnotify
+      udisks2
+      eject
       dunst
       maim
       slop

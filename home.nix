@@ -20,7 +20,7 @@ in
 
   programs.bash = {
     enable = true;
-    bashmount.enable = true;
+#    bashmount.enable = true;
     enableCompletion = true;
     shellAliases = {
       nc = "nvim ~/nixos-dotfiles/.";

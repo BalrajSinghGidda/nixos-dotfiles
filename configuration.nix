@@ -96,6 +96,7 @@
       lazygit
       gh
       kitty
+      unzip
       neovim
       zellij
       tmux

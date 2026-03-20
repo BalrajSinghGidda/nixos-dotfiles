@@ -14,5 +14,6 @@
     # Nix development tools
     nil             # Nix language server
     nixpkgs-fmt     # Nix code formatter
+    (callPackage ./programs/copilot-fix.nix {})
   ];
 }

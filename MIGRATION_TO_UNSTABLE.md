@@ -17,6 +17,21 @@ This guide walks you through migrating from NixOS 25.11 (stable) to nixos-unstab
 
 ## Migration Steps
 
+### Important: No nix-channel commands needed! 🎉
+
+You're using **Flakes**, which is the modern way to manage NixOS. Your `flake.nix` file defines your "channel" (nixpkgs source), so you don't need to run any `nix-channel` commands.
+
+**Old way (channels):**
+```bash
+sudo nix-channel --add https://nixos.org/channels/nixos-unstable nixos
+sudo nix-channel --update
+```
+
+**Your way (flakes):**
+```bash
+nix flake update  # That's it!
+```
+
 ### Step 1: Update flake.nix ✅ (DONE)
 
 The flake.nix has been updated to use:

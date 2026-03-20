@@ -5,8 +5,10 @@
   programs.git = {
     enable = true;
     # IMPORTANT: Change these to your own details!
-    userName = "BalrajSinghGidda";
-    userEmail = "anonystargamerz@gmail.com";
+    settings = {
+      user.name = "BalrajSinghGidda";
+      user.email = "anonystargamerz@gmail.com";
+    };
   };
 
   # GitHub CLI configuration

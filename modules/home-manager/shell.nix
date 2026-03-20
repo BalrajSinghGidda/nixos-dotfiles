@@ -1,29 +1,55 @@
 { pkgs, ... }:
 
 {
+  # Bash shell configuration
   programs.bash = {
     enable = true;
-    enableCompletion = true;
+    enableCompletion = true;  # Tab completion for commands
+    
+    # Custom shell aliases for convenience
     shellAliases = {
-      nc = "nvim ~/nixos-dotfiles/.";
-      btw = "echo I use NixOS, btw";
-      nrs = "sudo nixos-rebuild switch --flake ~/nixos-dotfiles/#nixos-btw";
-      edit-config = "nvim ~/nixos-dotfiles/configuration.nix";
-      edit-home-config = "nvim ~/nixos-dotfiles/home.nix";
+      # NixOS management
+      nc = "nvim ~/nixos-dotfiles/.";  # Quick edit dotfiles
+      btw = "echo I use NixOS, btw";   # Because we have to let everyone know
+      nrs = "sudo nixos-rebuild switch --flake ~/nixos-dotfiles/#nixos-btw";  # Rebuild system
+      
+      # Config editing shortcuts
+      edit-nixos = "nvim ~/nixos-dotfiles/modules/nixos/";
+      edit-home = "nvim ~/nixos-dotfiles/modules/home-manager/";
+      edit-host = "nvim ~/nixos-dotfiles/hosts/nixos-btw/";
+      
+      # Enhanced file operations
       ls = "eza --long -ahF --no-user --no-permissions --git --icons=always --color=always --grid";
-      cd = "z";
-      bm = "bashmount";
+      cd = "z";  # Use zoxide for smart directory jumping
+      
+      # Utilities
+      bm = "bashmount";  # Mount/unmount utility
     };
+    
+    # Don't save these commands in history
     historyIgnore = [
       "ls"
       "exit"
     ];
+    
+    # Additional bash configuration
     bashrcExtra = ''
+      # Custom prompt: cyan user@host, green directory, light blue prompt
       export PS1="\[\e[38;5;75m\]\u@\h \[\e[38;5;113m\]\w \[\e[38;5;189m\]\$ \[\e[0m\]"
+      
+      # Use Neovim as manpage viewer
       export MANPAGER="nvim +Man!"
+      
+      # Use fd for faster file searching in fzf
       export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow'
+      
+      # Initialize direnv (per-directory environments)
       eval "$(direnv hook bash)"
+      
+      # Initialize zoxide (smart cd)
       eval "$(zoxide init bash)"
+      
+      # Show system info on shell startup
       nitch
     '';
   };

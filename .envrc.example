@@ -1,0 +1,48 @@
+# Example .envrc for direnv
+# Copy this to your project directory and customize as needed
+
+# Load a Nix shell environment
+# Uncomment one of these based on your project type:
+
+# For a simple shell with specific packages:
+# use nix
+
+# For a flake-based project:
+# use flake
+
+# For a custom shell.nix:
+# use nix
+
+# Watch for changes in these files (will reload direnv when they change):
+# watch_file shell.nix
+# watch_file flake.nix
+# watch_file flake.lock
+
+# Layout: Load programming language environments
+# Uncomment the one you need:
+
+# Python with virtualenv:
+# layout python python3
+
+# Python with specific version:
+# layout python python3.11
+
+# Node.js:
+# layout node
+
+# Ruby:
+# layout ruby
+
+# Example: Set environment variables
+# export DATABASE_URL="postgresql://localhost/mydb"
+# export DEBUG="true"
+
+# Example: Add local bin to PATH
+# PATH_add ./bin
+
+# Example: Load secrets from a file (never commit this file!)
+# dotenv .env.local
+
+# For this repo's devshell scripts:
+# After running make-py-devshell, make-cpp-devshell, etc.
+# An .envrc will be automatically created in your project directory

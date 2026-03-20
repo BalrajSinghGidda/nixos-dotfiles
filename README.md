@@ -4,6 +4,54 @@
 
 Welcome to my NixOS configuration! This is my personal setup running on a Dell Latitude 7490, featuring a sleek Qtile window manager with a Tokyo Night theme aesthetic. Built for coding, gaming, and general tech tinkering.
 
+## 📚 Documentation
+
+New to this repo? Start here:
+
+- **[⚡ Quick Start Guide](docs/QUICK_START.md)** - Get up and running in minutes
+- **[🏗️ Architecture Overview](docs/ARCHITECTURE.md)** - Understand how everything fits together
+- **[📦 Module Guide](docs/MODULE_GUIDE.md)** - Deep dive into each configuration module
+
+## 📂 Repository Structure
+
+```
+nixos-dotfiles/
+├── flake.nix              # Main flake configuration
+├── flake.lock             # Dependency lock file
+│
+├── hosts/                 # Host-specific configurations
+│   └── nixos-btw/        # This machine's config
+│       ├── default.nix          # Entry point
+│       ├── configuration.nix    # Host-specific settings
+│       ├── hardware-configuration.nix
+│       └── home.nix             # Home Manager config
+│
+├── modules/               # Reusable configuration modules
+│   ├── nixos/            # System-level (requires sudo)
+│   │   ├── core.nix            # Boot, networking, users
+│   │   ├── packages.nix        # System packages & fonts
+│   │   ├── services.nix        # System services
+│   │   └── wallpapers.nix      # Custom wallpapers
+│   │
+│   └── home-manager/     # User-level (no sudo)
+│       ├── apps.nix            # User packages
+│       ├── git.nix             # Git configuration
+│       ├── shell.nix           # Bash configuration
+│       └── devshell-scripts.nix # Dev environment scripts
+│
+├── config/                # Application dotfiles
+│   ├── nvim/             # Neovim configuration
+│   ├── qtile/            # Qtile WM configuration
+│   ├── rofi/             # Rofi launcher
+│   ├── picom/            # Compositor
+│   └── kitty/            # Terminal emulator
+│
+└── docs/                  # Documentation
+    ├── ARCHITECTURE.md         # System architecture
+    ├── QUICK_START.md          # Installation guide
+    └── MODULE_GUIDE.md         # Module documentation
+```
+
 ## 🎨 The Setup
 
 **OS:** NixOS 25.05 (Stable)  
@@ -49,30 +97,30 @@ Welcome to my NixOS configuration! This is my personal setup running on a Dell L
 
 ## 🎯 Quick Start
 
-### Prerequisites
-- A working NixOS installation
-- Git installed
-- Basic understanding of Nix flakes
+### For First-Time Users
 
-### Installation
+1. **Read the documentation first:**
+   - Start with [Quick Start Guide](docs/QUICK_START.md)
+   - Understand the [Architecture](docs/ARCHITECTURE.md)
+   - Review [Module Guide](docs/MODULE_GUIDE.md) for customization
 
-1. **Clone the repository:**
+2. **Clone and customize:**
 ```bash
-git clone https://github.com/YourUsername/nixos-dotfiles ~/nixos-dotfiles
+git clone https://github.com/BalrajSinghGidda/nixos-dotfiles ~/nixos-dotfiles
 cd ~/nixos-dotfiles
 ```
 
-2. **Review and customize:**
-   - Edit `configuration.nix` for system-level changes
-   - Edit `home.nix` for user-level configurations
-   - Modify configs in the `config/` directory as needed
+3. **Important: Update for your system:**
+   - Copy your hardware config: `sudo cp /etc/nixos/hardware-configuration.nix hosts/nixos-btw/`
+   - Update username in `hosts/nixos-btw/home.nix` and `modules/nixos/core.nix`
+   - Update Git info in `modules/home-manager/git.nix`
 
-3. **Apply the configuration:**
+4. **Apply the configuration:**
 ```bash
 sudo nixos-rebuild switch --flake ~/nixos-dotfiles/#nixos-btw
 ```
 
-4. **Enjoy your new setup!** 🎉
+See the [Quick Start Guide](docs/QUICK_START.md) for detailed instructions!
 
 ## 🔥 Custom Aliases
 
@@ -163,6 +211,30 @@ which intelephense
 
 ### Home Manager conflicts?
 Home Manager creates backups with `.backup` extension. Check those files if configs aren't applying.
+
+## 🛠️ Makefile Commands
+
+This repo includes a Makefile for common tasks:
+
+```bash
+make switch   # Apply configuration
+make test     # Test without switching
+make build    # Build without activating
+make update   # Update dependencies
+make clean    # Remove old generations
+make check    # Validate flake
+make fmt      # Format Nix files
+```
+
+## 🤝 Contributing
+
+Want to improve this configuration? Check out [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines!
+
+Quick tips:
+- Fork and customize for your own use
+- Open issues for bugs or questions
+- Submit PRs for improvements
+- Keep changes focused and well-documented
 
 ## 📚 Resources
 

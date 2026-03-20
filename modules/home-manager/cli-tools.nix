@@ -13,6 +13,7 @@
     
     # Nix development tools
     nil             # Nix language server
+    github-copilot-cli
     nixpkgs-fmt     # Nix code formatter
     (callPackage ./programs/copilot-fix.nix {})
   ];

@@ -7,7 +7,7 @@
     autoRepeatInterval = 35;
     windowManager.qtile.enable = true;
     displayManager.sessionCommands = ''
-      xwallpaper --zoom /run/current-system/sw/share/wallpapers/nix.png'';
+      xwallpaper --zoom /home/balraj/nixos-dotfiles/modules/nixos/wallpapers/Pictures/nix.png'';
   };
 
   services.displayManager.ly = {

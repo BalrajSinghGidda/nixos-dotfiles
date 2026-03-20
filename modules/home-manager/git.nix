@@ -3,8 +3,10 @@
 {
   programs.git = {
     enable = true;
-    userName = "BalrajSinghGidda";
-    userEmail = "anonystargamerz@gmail.com";
+    settings = {
+      user.name = "BalrajSinghGidda";
+      user.email = "anonystargamerz@gmail.com";
+    };
   };
 
   programs.gh = {

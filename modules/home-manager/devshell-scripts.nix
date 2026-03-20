@@ -1,8 +1,8 @@
 { stdenv }:
 
 stdenv.mkDerivation {
-  name = "custom-scripts";
-  src = ../bin;
+  name = "devshell-scripts";
+  src = ./devshell-scripts;
   installPhase = ''
     mkdir -p $out/bin
     cp -r $src/* $out/bin/

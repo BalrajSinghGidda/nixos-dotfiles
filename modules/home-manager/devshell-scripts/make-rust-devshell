@@ -1,0 +1,82 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+usage() {
+  cat <<EOF
+Usage: $(basename "$0") <project-name>
+
+Creates a folder <project-name> with a flake exposing a Rust devshell.
+Includes rustc, cargo, rust-analyzer.
+
+Example:
+  make-rust-devshell myrustproj
+EOF
+  exit 1
+}
+
+if [ $# -lt 1 ]; then usage; fi
+
+proj="$1"
+
+if [ -d "$proj" ]; then
+  echo "error: directory '$proj' already exists" >&2
+  exit 1
+fi
+
+mkdir -p "$proj"
+cd "$proj"
+
+# write .envrc (direnv + hide diff + use flake)
+cat > .envrc <<'EOF'
+export DIRENV_HIDE_ENV_DIFF=1
+use flake
+EOF
+
+# write README
+cat > README.md <<EOF
+# $proj (Rust devshell)
+
+Enter the shell with:
+
+```
+nix develop
+```
+EOF
+
+# generate flake.nix
+cat > flake.nix <<'EOF'
+{
+  description = "Dev shell: Rust";
+
+  inputs = {
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
+    flake-utils.url = "github:numtide/flake-utils";
+  };
+
+  outputs = { self, nixpkgs, flake-utils, ... }:
+    flake-utils.lib.eachDefaultSystem (system:
+      let
+        pkgs = import nixpkgs { inherit system; };
+      in {
+        devShells.default = pkgs.mkShell {
+            name = "rust-devshell";
+            buildInputs = [
+              pkgs.rustc
+              pkgs.cargo
+              pkgs.rust-analyzer
+            ];
+            shellHook = ''
+              clear
+              echo "🦀 Rust devshell ready"
+            '';
+          };
+      });
+}
+EOF
+
+git init -q
+git add -A
+git commit -qm "init: rust devshell" || true
+
+echo "Created Rust devshell project '$proj'."
+echo "cd $proj && direnv allow && nix develop"

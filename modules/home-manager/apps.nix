@@ -1,7 +1,7 @@
 { pkgs, ... }:
 
 let
-  custom-scripts = pkgs.callPackage ../../pkgs/custom-scripts.nix {};
+  devshell-scripts = pkgs.callPackage ./devshell-scripts.nix {};
 in
 {
   programs.gemini-cli = {
@@ -25,6 +25,6 @@ in
     eza
     zoxide
     python313Packages.euporie
-    custom-scripts
+    devshell-scripts
   ];
 }

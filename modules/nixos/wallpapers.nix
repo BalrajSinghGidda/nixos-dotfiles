@@ -2,7 +2,7 @@
 
 stdenv.mkDerivation {
   name = "wallpapers";
-  src = ../extras/Pictures;
+  src = ./wallpapers/Pictures;
   installPhase = ''
     mkdir -p $out/share/wallpapers
     cp -r $src/* $out/share/wallpapers/

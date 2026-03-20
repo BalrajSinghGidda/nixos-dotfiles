@@ -1,7 +1,7 @@
 { pkgs, ... }:
 
 let
-  wallpapers = (pkgs.callPackage ../../pkgs/wallpapers.nix {});
+  wallpapers = (pkgs.callPackage ./wallpapers.nix {});
 in
 {
   environment.systemPackages = with pkgs; [

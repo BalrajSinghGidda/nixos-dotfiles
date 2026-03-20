@@ -3,12 +3,12 @@
 
   # Flake inputs - dependencies for this configuration
   inputs = {
-    # NixOS 25.11 stable channel
-    nixpkgs.url = "nixpkgs/nixos-25.11";
+    # NixOS unstable channel (bleeding edge)
+    nixpkgs.url = "nixpkgs/nixos-unstable";
     
     # Home Manager for user-level configuration management
     home-manager = {
-      url = "github:nix-community/home-manager/release-25.11";
+      url = "github:nix-community/home-manager/master";
       # Ensure Home Manager uses the same nixpkgs as system
       inputs.nixpkgs.follows = "nixpkgs";
     };

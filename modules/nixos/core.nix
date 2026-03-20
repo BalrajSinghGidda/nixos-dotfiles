@@ -45,5 +45,6 @@
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # NixOS state version - DON'T change after initial installation
+  # This is the version you initially installed, not the channel you're using
   system.stateVersion = "25.11";
 }

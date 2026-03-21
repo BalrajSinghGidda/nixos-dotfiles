@@ -9,31 +9,58 @@ import subprocess
 mod = "mod4"
 terminal = guess_terminal()
 
-myTerm = "kitty" 
+myTerm = "kitty"
 
 keys = [
     Key([mod], "h", lazy.layout.left(), desc="Move focus to left"),
     Key([mod], "l", lazy.layout.right(), desc="Move focus to right"),
     Key([mod], "j", lazy.layout.down(), desc="Move focus down"),
     Key([mod], "k", lazy.layout.up(), desc="Move focus up"),
-    Key([mod, "shift"], "space", lazy.layout.next(), desc="Move window focus to other window"),
-    Key([mod, "shift"], "h", lazy.layout.shuffle_left(), desc="Move window to the left"),
-    Key([mod, "shift"], "l", lazy.layout.shuffle_right(), desc="Move window to the right"),
+    Key(
+        [mod, "shift"],
+        "space",
+        lazy.layout.next(),
+        desc="Move window focus to other window",
+    ),
+    Key(
+        [mod, "shift"], "h", lazy.layout.shuffle_left(), desc="Move window to the left"
+    ),
+    Key(
+        [mod, "shift"],
+        "l",
+        lazy.layout.shuffle_right(),
+        desc="Move window to the right",
+    ),
     Key([mod, "shift"], "j", lazy.layout.shuffle_down(), desc="Move window down"),
     Key([mod, "shift"], "k", lazy.layout.shuffle_up(), desc="Move window up"),
     Key([mod, "control"], "h", lazy.layout.grow_left(), desc="Grow window to the left"),
-    Key([mod, "control"], "l", lazy.layout.grow_right(), desc="Grow window to the right"),
+    Key(
+        [mod, "control"], "l", lazy.layout.grow_right(), desc="Grow window to the right"
+    ),
     Key([mod, "control"], "j", lazy.layout.grow_down(), desc="Grow window down"),
     Key([mod, "control"], "k", lazy.layout.grow_up(), desc="Grow window up"),
     Key([mod], "n", lazy.layout.normalize(), desc="Reset all window sizes"),
     Key([], "XF86AudioRaiseVolume", lazy.spawn("pamixer -i 5"), desc="Volume Up"),
     Key([], "XF86AudioLowerVolume", lazy.spawn("pamixer -d 5"), desc="Volume Down"),
     Key([], "XF86AudioMute", lazy.spawn("pamixer -t"), desc="Mute Audio"),
-
-    Key([], "XF86AudioMicMute", lazy.spawn("pamixer --default-source -t"), desc="Toggle microphone mute"),
-
-    Key([], "XF86MonBrightnessUp", lazy.spawn("brightnessctl set +10%"), desc="Increase brightness"),
-    Key([], "XF86MonBrightnessDown", lazy.spawn("brightnessctl set 10%-"), desc="Decrease brightness"),
+    Key(
+        [],
+        "XF86AudioMicMute",
+        lazy.spawn("pamixer --default-source -t"),
+        desc="Toggle microphone mute",
+    ),
+    Key(
+        [],
+        "XF86MonBrightnessUp",
+        lazy.spawn("brightnessctl set +10%"),
+        desc="Increase brightness",
+    ),
+    Key(
+        [],
+        "XF86MonBrightnessDown",
+        lazy.spawn("brightnessctl set 10%-"),
+        desc="Decrease brightness",
+    ),
     Key(
         [mod, "shift"],
         "Return",
@@ -49,23 +76,29 @@ keys = [
         lazy.window.toggle_fullscreen(),
         desc="Toggle fullscreen on the focused window",
     ),
-    Key([mod], "t", lazy.window.toggle_floating(), desc="Toggle floating on the focused window"),
+    Key(
+        [mod],
+        "t",
+        lazy.window.toggle_floating(),
+        desc="Toggle floating on the focused window",
+    ),
     Key([mod, "control"], "r", lazy.reload_config(), desc="Reload the config"),
     Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
-    Key([mod], "space", lazy.spawn("rofi -show drun -show-icons"), desc='Run Launcher'),
+    Key([mod], "space", lazy.spawn("rofi -show drun -show-icons"), desc="Run Launcher"),
     Key(
-        [mod], 
+        [mod],
         "s",
         #        lazy.spawn('sh -c "maim -s | xclip -selection clipboard -t image/png -i"'),
         #        lazy.spawn('sh -c "FILE=/home/balraj/Pictures/Screenshots/$(date +%Y-%m-%d_%H-%M-%S).png; maim -s $FILE && xclip -selection clipboard -t image/png -i $FILE"')
         lazy.spawn('notify-send "screenshot keybind triggered"'),
-        lazy.spawn("""sh -c 'mkdir -p "$HOME/Pictures/Screenshots" && \
+        lazy.spawn(
+            """sh -c 'mkdir -p "$HOME/Pictures/Screenshots" && \
         FILE="$HOME/Pictures/Screenshots/$(date +%Y-%m-%d_%H-%M-%S).png" && \
         maim -s "$FILE" && \
         xclip -selection clipboard -t image/png -i "$FILE" && \
-        notify-send "Screenshot saved" "$FILE"'"""),
-
-        desc="Screenshot"
+        notify-send "Screenshot saved" "$FILE"'"""
+        ),
+        desc="Screenshot",
     ),
 ]
 
@@ -91,31 +124,52 @@ for i in groups:
                 lazy.group[i.name].toscreen(),
                 desc=f"Switch to group {i.name}",
             ),
-            Key([mod, "shift"], i.name, lazy.window.togroup(i.name),
-                desc="move focused window to group {}".format(i.name)),
+            Key(
+                [mod, "shift"],
+                i.name,
+                lazy.window.togroup(i.name),
+                desc="move focused window to group {}".format(i.name),
+            ),
         ]
     )
 
+# # Tokyonight Theme
+# colors = [
+#     ["#1a1b26", "#1a1b26"], # bg
+#     ["#a9b1d6", "#a9b1d6"], # fg
+#     ["#32344a", "#32344a"], # bg1 / subtle contrast
+#     ["#f7768e", "#f7768e"], # red
+#     ["#9ece6a", "#9ece6a"], # green
+#     ["#e0af68", "#e0af68"], # yellow
+#     ["#7aa2f7", "#7aa2f7"], # blue
+#     ["#ad8ee6", "#ad8ee6"], # purple
+#     ["#0db9d7", "#0db9d7"], # aqua
+#     ["#444b6a", "#444b6a"], # gray
+# ]
+
 colors = [
-    ["#1a1b26", "#1a1b26"],  
-    ["#a9b1d6", "#a9b1d6"],  
-    ["#32344a", "#32344a"],  
-    ["#f7768e", "#f7768e"],  
-    ["#9ece6a", "#9ece6a"],  
-    ["#e0af68", "#e0af68"],  
-    ["#7aa2f7", "#7aa2f7"],  
-    ["#ad8ee6", "#ad8ee6"], 
-    ["#0db9d7", "#0db9d7"],  
-    ["#444b6a", "#444b6a"]   
+    ["#282828", "#282828"],  # bg
+    ["#ebdbb2", "#ebdbb2"],  # fg
+    ["#3c3836", "#3c3836"],  # bg1 / subtle contrast
+    ["#fb4934", "#fb4934"],  # red
+    ["#b8bb26", "#b8bb26"],  # green
+    ["#fabd2f", "#fabd2f"],  # yellow
+    ["#83a598", "#83a598"],  # blue
+    ["#d3869b", "#d3869b"],  # purple
+    ["#8ec07c", "#8ec07c"],  # aqua
+    ["#504945", "#504945"],  # gray
 ]
 
-def C(x): return x[0] if isinstance(x, (list, tuple)) else x
+
+def C(x):
+    return x[0] if isinstance(x, (list, tuple)) else x
+
 
 layout_theme = {
-    "border_width" : 1,
-    "margin" : 1,
-    "border_focus" : colors[6],
-    "border_normal" : colors[0],
+    "border_width": 1,
+    "margin": 1,
+    "border_focus": colors[6],
+    "border_normal": colors[0],
 }
 
 layouts = [
@@ -148,104 +202,101 @@ sep = widget.Sep(linewidth=1, padding=8, foreground=colors[9])
 screens = [
     Screen(
         top=bar.Bar(
-            widgets = [
-                widget.Spacer(length = 8),
+            widgets=[
+                widget.Spacer(length=8),
                 widget.Image(
-                    filename = "~/.config/qtile/icons/balraj.png",
-                    scale = "False",
-                    mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn("qtilekeys-yad")},
+                    filename="~/.config/qtile/icons/balraj.png",
+                    scale="False",
+                    mouse_callbacks={
+                        "Button1": lambda: qtile.cmd_spawn("qtilekeys-yad")
+                    },
                 ),
-                widget.Prompt(
-                    font = "Ubuntu Mono",
-                    fontsize=14,
-                    foreground = colors[1]
-                ),
+                widget.Prompt(font="Ubuntu Mono", fontsize=14, foreground=colors[1]),
                 widget.GroupBox(
-                    fontsize = 18,
-                    margin_y = 5,
-                    margin_x = 5,
-                    padding_y = 0,
-                    padding_x = 2,
-                    borderwidth = 3,
-                    active = colors[8],
-                    inactive = colors[9],
-                    rounded = False,
-                    highlight_color = colors[0],
-                    highlight_method = "line",
-                    this_current_screen_border = colors[7],
-                    this_screen_border = colors [4],
-                    other_current_screen_border = colors[7],
-                    other_screen_border = colors[4],
+                    fontsize=18,
+                    margin_y=5,
+                    margin_x=5,
+                    padding_y=0,
+                    padding_x=2,
+                    borderwidth=3,
+                    active=colors[8],
+                    inactive=colors[9],
+                    rounded=False,
+                    highlight_color=colors[0],
+                    highlight_method="line",
+                    this_current_screen_border=colors[7],
+                    this_screen_border=colors[4],
+                    other_current_screen_border=colors[7],
+                    other_screen_border=colors[4],
                 ),
                 widget.TextBox(
-                    text = '|',
-                    font = "JetBrainsMono Nerd Font Propo Bold",
-                    foreground = colors[9],
-                    padding = 2,
-                    fontsize = 14
+                    text="|",
+                    font="JetBrainsMono Nerd Font Propo Bold",
+                    foreground=colors[9],
+                    padding=2,
+                    fontsize=14,
                 ),
-                widget.CurrentLayout(
-                    foreground = colors[1],
-                    padding = 5
-                ),
+                widget.CurrentLayout(foreground=colors[1], padding=5),
                 widget.TextBox(
-                    text = '|',
-                    font = "JetBrainsMono Nerd Font Propo Bold",
-                    foreground = colors[9],
-                    padding = 2,
-                    fontsize = 14
+                    text="|",
+                    font="JetBrainsMono Nerd Font Propo Bold",
+                    foreground=colors[9],
+                    padding=2,
+                    fontsize=14,
                 ),
-                widget.WindowName(
-                    foreground = colors[6],
-                    padding = 8,
-                    max_chars = 40
-                ),
-#                widget.GenPollText(
-#                    update_interval = 300,
-#                    func = lambda: subprocess.check_output("printf $(uname -r)", shell=True, text=True),
-#                    foreground = colors[3],
-#                    padding = 8, 
-#                    fmt = '{}',
-#                ),
-#                sep,
+                widget.WindowName(foreground=colors[6], padding=8, max_chars=40),
+                #                widget.GenPollText(
+                #                    update_interval = 300,
+                #                    func = lambda: subprocess.check_output("printf $(uname -r)", shell=True, text=True),
+                #                    foreground = colors[3],
+                #                    padding = 8,
+                #                    fmt = '{}',
+                #                ),
+                #                sep,
                 widget.CPU(
-                    foreground = colors[4],
-                    padding = 8, 
-                    mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(myTerm + ' -e btop')},
+                    foreground=colors[4],
+                    padding=8,
+                    mouse_callbacks={
+                        "Button1": lambda: qtile.cmd_spawn(myTerm + " -e btop")
+                    },
                     format="CPU: {load_percent}%",
                 ),
                 sep,
                 widget.Memory(
-                    foreground = colors[8],
-                    padding = 8, 
-                    mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(myTerm + ' -e btop')},
-                    format = 'Mem: {MemUsed:.0f}{mm}',
+                    foreground=colors[8],
+                    padding=8,
+                    mouse_callbacks={
+                        "Button1": lambda: qtile.cmd_spawn(myTerm + " -e btop")
+                    },
+                    format="Mem: {MemUsed:.0f}{mm}",
                 ),
                 sep,
-#                widget.DF(
-#                    update_interval = 60,
-#                    foreground = colors[5],
-#                    padding = 8, 
-#                    mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn('notify-disk')},
-#                    partition = '/',
-#                    format = '{uf}{m} free',
-#                    fmt = 'Disk: {}',
-#                    visible_on_warn = False,
-#                ),
-#                sep,
+                #                widget.DF(
+                #                    update_interval = 60,
+                #                    foreground = colors[5],
+                #                    padding = 8,
+                #                    mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn('notify-disk')},
+                #                    partition = '/',
+                #                    format = '{uf}{m} free',
+                #                    fmt = 'Disk: {}',
+                #                    visible_on_warn = False,
+                #                ),
+                #                sep,
                 widget.Battery(
-                    foreground=colors[5],           # pick a palette slot you like
+                    foreground=colors[5],  # pick a palette slot you like
                     padding=8,
                     update_interval=5,
-                    format='{percent:2.0%} {char} {hour:d}:{min:02d}',  # e.g. "73% ⚡ 1:45"
-                    fmt='Bat: {}',
-                    charge_char='',               # shown while charging
-                    discharge_char='',            # Nerd icon; use '-' if you prefer plain ascii
-                    full_char='✔',                 # when at/near 100%
-                    unknown_char='?',
-                    empty_char='!', 
+                    format="{percent:2.0%} {char} {hour:d}:{min:02d}",  # e.g. "73% ⚡ 1:45"
+                    fmt="Bat: {}",
+                    charge_char="",  # shown while charging
+                    discharge_char="",  # Nerd icon; use '-' if you prefer plain ascii
+                    full_char="✔",  # when at/near 100%
+                    unknown_char="?",
+                    empty_char="!",
                     mouse_callbacks={
-                        'Button1': lambda: qtile.cmd_spawn(myTerm + ' -e upower -i $(upower -e | grep BAT)'),
+                        "Button1": lambda: qtile.cmd_spawn(
+                            myTerm + " -e upower -i $(upower -e | grep BAT)"
+                        ),
                     },
                 ),
                 sep,
@@ -253,33 +304,40 @@ screens = [
                     backlight_name="intel_backlight",  # change if different
                     format=" Backlight: {percent:2.0%} ",
                     foreground=colors[6],
-                    step=5
+                    step=5,
                 ),
                 sep,
                 widget.Volume(
-                    foreground = colors[7],
-                    padding = 8, 
-                    fmt = 'Vol: {}',
+                    foreground=colors[7],
+                    padding=8,
+                    fmt="Vol: {}",
                 ),
                 sep,
                 widget.Clock(
-                    foreground = colors[8],
-                    padding = 8, 
-                    mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn('notify-date')},
-                    format = "%a, %b %d - %H:%M",
+                    foreground=colors[8],
+                    padding=8,
+                    mouse_callbacks={"Button1": lambda: qtile.cmd_spawn("notify-date")},
+                    format="%a, %b %d - %H:%M",
                 ),
-                widget.Systray(padding = 6),
-                widget.Spacer(length = 8),
+                widget.Systray(padding=6),
+                widget.Spacer(length=8),
             ],
-            margin=[0, 0, 0, 0], 
-            size=30
+            margin=[0, 0, 0, 0],
+            size=30,
         ),
     ),
 ]
 
 mouse = [
-    Drag([mod], "Button1", lazy.window.set_position_floating(), start=lazy.window.get_position()),
-    Drag([mod], "Button3", lazy.window.set_size_floating(), start=lazy.window.get_size()),
+    Drag(
+        [mod],
+        "Button1",
+        lazy.window.set_position_floating(),
+        start=lazy.window.get_position(),
+    ),
+    Drag(
+        [mod], "Button3", lazy.window.set_size_floating(), start=lazy.window.get_size()
+    ),
     Click([mod], "Button2", lazy.window.bring_to_front()),
 ]
 

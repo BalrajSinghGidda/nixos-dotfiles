@@ -1,16 +1,14 @@
-{ pkgs, ... }:
-
-{
+{pkgs, ...}: {
   # Neovim configuration using nvf (Neovim configuration framework)
   # nvf provides a declarative way to configure Neovim within NixOS
   # This replaces the previous manual Lua-based configuration
-  
+
   programs.nvf = {
     enable = true;
     settings = {
       vim = {
         # Command aliases for backwards compatibility
-        viAlias = true;   # Map 'vi' command to nvim
+        viAlias = true; # Map 'vi' command to nvim
         vimAlias = false; # Keep 'vim' separate
 
         syntaxHighlighting = true;
@@ -36,37 +34,43 @@
         debugger.nvim-dap.enable = true;
 
         ui = {
-          colorizer.enable = true;   # Highlight color codes
-          illuminate.enable = true;  # Highlight word under cursor
+          nvim-highlight-colors = {
+            # Highlight color codes
+            enable = true;
+            setupOpts = {
+              render = "foreground";
+            };
+          };
+          illuminate.enable = true; # Highlight word under cursor
         };
 
         utility = {
-          mkdir.enable = true;       # Auto-create directories on save
-          yazi-nvim.enable = true;   # Terminal file manager integration
+          mkdir.enable = true; # Auto-create directories on save
+          yazi-nvim.enable = true; # Terminal file manager integration
         };
 
         # Tokyo Night color theme
         theme = {
           enable = true;
-          name = "tokyonight";
-          style = "night";
+          name = "gruvbox";
+          style = "dark";
         };
 
         # Editor options
         options = {
-          shiftwidth = 4;  # Indent with 4 spaces
-          tabstop = 4;     # Tab displays as 4 spaces
+          shiftwidth = 4; # Indent with 4 spaces
+          tabstop = 4; # Tab displays as 4 spaces
         };
 
         # Language support configuration
         languages = {
           enableTreesitter = true; # Syntax highlighting and parsing
-          enableFormat = true;     # Auto-formatting support
-          enableDAP = true;        # Debug support for languages
+          enableFormat = true; # Auto-formatting support
+          enableDAP = true; # Debug support for languages
 
           # Enable language servers and tools
           python.enable = true;
-          clang.enable = true;  # C/C++
+          clang.enable = true; # C/C++
           bash.enable = true;
           css.enable = true;
           go.enable = true;
@@ -104,9 +108,9 @@
         # Language Server Protocol configuration
         lsp = {
           enable = true;
-          formatOnSave = true;           # Auto-format on save
-          lspconfig.enable = true;        # LSP configurations
-          nvim-docs-view.enable = true;   # Documentation viewer
+          formatOnSave = true; # Auto-format on save
+          lspconfig.enable = true; # LSP configurations
+          nvim-docs-view.enable = true; # Documentation viewer
         };
 
         # Status line at the bottom

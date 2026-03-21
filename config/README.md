@@ -9,6 +9,16 @@ This directory contains dotfiles for various applications, managed by Home Manag
 - **picom/** - Picom compositor settings
 - **kitty/** - Kitty terminal emulator configuration
 
+## Important Note: Neovim Configuration
+
+**Neovim is no longer configured through this directory.**
+
+As of March 2026, Neovim configuration has been migrated to the **nvf** framework:
+- Configuration location: `modules/nixos/nvf.nix`
+- All plugins, LSP servers, and settings are managed declaratively through NixOS
+- The previous `config/nvim/` directory with Lua files has been removed
+- To customize Neovim, edit `modules/nixos/nvf.nix` instead
+
 ## How It Works
 
 These configurations are symlinked to `~/.config/` by Home Manager.

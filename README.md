@@ -4,6 +4,16 @@
 
 Welcome to my NixOS configuration! This is my personal setup running on a Dell Latitude 7490, featuring a sleek Qtile window manager with a Tokyo Night theme aesthetic. Built for coding, gaming, and general tech tinkering.
 
+## 🆕 Recent Updates (March 2026)
+
+### Major Changes:
+- **Neovim Migration to nvf**: Switched from manual Lua configuration to the nvf (Neovim framework) for declarative Neovim setup
+- **nix-alien Integration**: Added support for running unpatched binaries with automatic library detection
+- **Enhanced nix-ld**: Configured with 40+ common libraries for better non-NixOS binary compatibility
+- **Removed config/nvim/**: All Neovim configuration now lives in `modules/nixos/nvf.nix`
+
+See the [CHANGELOG.md](CHANGELOG.md) for detailed version history.
+
 ## 📚 Documentation
 
 New to this repo? Start here:
@@ -27,19 +37,23 @@ nixos-dotfiles/
 │
 ├── modules/               # Reusable configuration modules
 │   ├── nixos/            # System-level (requires sudo)
-│   │   ├── core.nix            # Boot, networking, users
+│   │   ├── core.nix            # Boot, networking, users, nix-ld
 │   │   ├── packages.nix        # System packages & fonts
 │   │   ├── services.nix        # System services
+│   │   ├── nvf.nix             # Neovim (via nvf framework)
 │   │   └── wallpapers.nix      # Custom wallpapers
 │   │
 │   └── home-manager/     # User-level (no sudo)
-│       ├── apps.nix            # User packages
+│       ├── cli-tools.nix       # CLI utilities
+│       ├── gui-apps.nix        # GUI applications
+│       ├── dev-tools.nix       # Development tools
 │       ├── git.nix             # Git configuration
 │       ├── shell.nix           # Bash configuration
-│       └── devshell-scripts.nix # Dev environment scripts
+│       └── programs/           # Program-specific configs
+│           ├── gemini-cli.nix
+│           └── nix-alien.nix
 │
 ├── config/                # Application dotfiles
-│   ├── nvim/             # Neovim configuration
 │   ├── qtile/            # Qtile WM configuration
 │   ├── rofi/             # Rofi launcher
 │   ├── picom/            # Compositor
@@ -66,19 +80,22 @@ nixos-dotfiles/
 - 🎯 **Declarative Configuration**: Everything is version-controlled and reproducible
 - 🌊 **Flakes-Based**: Modern Nix flakes for dependency management
 - 🏠 **Home Manager Integration**: User-level package and config management
-- 🔧 **LSP-Powered Neovim**: Pre-configured for Lua, PHP, TypeScript, Rust, Zig, C/C++, Nix, Haskell, and more
+- 🔧 **nvf-Powered Neovim**: Declaratively configured via NixOS (no Mason, no manual Lua!)
 - 🎨 **Consistent Theming**: Tokyo Night colors across all applications
 - ⚡ **Performance Optimized**: Lightweight and snappy on a Dell Latitude 7490
 - 🐳 **Docker Ready**: Rootless Docker setup included
+- 👽 **nix-alien Support**: Run unpatched binaries with automatic library detection
+- 📦 **nix-ld Integration**: 40+ system libraries for non-NixOS executables
 
 ## 📦 Key Applications
 
 ### Development
-- **Neovim** with LSP, Treesitter, Telescope, and Harpoon
+- **Neovim** configured via **nvf** (Neovim framework) with LSP, Treesitter, Telescope
+- Language support: Python, TypeScript, C/C++, Go, Java, Bash, Nix, HTML, CSS, SQL, YAML, Markdown
 - **Kitty** terminal with custom Tokyo Night theme
 - **Git** + **Lazygit** + **GitHub CLI**
-- Language servers for multiple languages (no Mason, pure system packages!)
 - **Zellij** and **Tmux** for terminal multiplexing
+- **nix-alien** for running non-NixOS binaries (aliases: `na`, `nald`)
 
 ### Productivity
 - **Firefox** as default browser
@@ -136,40 +153,29 @@ cd          # Smart directory jumping with zoxide
 
 ## ⌨️ Neovim Keybinds
 
-My Neovim setup is highly customized. Here are some key bindings:
+My Neovim is configured via **nvf** (Neovim framework). Configuration is in `modules/nixos/nvf.nix`.
 
-**Leader key:** `<Space>`
+**Key features:**
+- File tree: nvim-tree
+- Fuzzy finder: Telescope
+- Git integration: Neogit + Lazygit
+- Terminal: toggleterm (open with `,`)
+- Auto-completion: nvim-cmp
+- LSP with format-on-save
 
-### Essential Binds
-- `<leader>cd` - Open file explorer
-- `<leader>ff` - Find files (Telescope)
-- `<leader>fg` - Live grep
-- `<leader>fb` - Browse buffers
-- `<leader>a` - Add file to Harpoon
-- `<C-e>` - Toggle Harpoon menu
-- `<leader>u` - Toggle Undotree
-
-### LSP
-- `gd` - Go to definition
-- `gr` - Show references
-- `K` - Hover documentation
-- `<F2>` - Rename symbol
-- `<F3>` - Format code
-- `<F4>` - Code actions
-
-Check `config/nvim/README.md` for the complete keybind list!
+To customize keybinds or add plugins, edit `modules/nixos/nvf.nix` and rebuild.
 
 ## 🎨 Theme Customization
 
 The Tokyo Night theme is applied consistently across:
 - Qtile status bar and window decorations
 - Kitty terminal colors
-- Neovim syntax highlighting
+- Neovim (via nvf configuration)
 - Rofi launcher
 
 Want to change themes? Update the color schemes in:
 - `config/kitty/kitty.conf`
-- `config/nvim/lua/plugins/colors.lua`
+- `modules/nixos/nvf.nix` (search for "tokyonight")
 - `config/rofi/tokyonight.rasi`
 - `config/qtile/config.py`
 
@@ -198,14 +204,22 @@ My setup runs on:
 sudo nixos-rebuild switch --flake ~/nixos-dotfiles/#nixos-btw --show-trace
 ```
 
-### LSP not working?
-Check if language servers are installed:
-```bash
-# Example for Lua
-which lua-language-server
+### Neovim LSP not working?
+Neovim is configured via nvf. Check language settings in `modules/nixos/nvf.nix`.
 
-# Example for PHP
-which intelephense
+Language servers are installed automatically. To verify:
+```bash
+which lua-language-server
+which nil  # Nix LSP
+```
+
+### nix-alien not working?
+Check if it's available:
+```bash
+nix-alien --version
+# Or use aliases
+na --version
+nald --help
 ```
 
 ### Home Manager conflicts?

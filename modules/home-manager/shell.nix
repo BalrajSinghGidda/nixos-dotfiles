@@ -1,6 +1,4 @@
-{ pkgs, ... }:
-
-{
+{pkgs, ...}: {
   # Bash shell configuration
   programs.bash = {
     enable = true;
@@ -12,7 +10,7 @@
       nc = "nvim ~/nixos-dotfiles/."; # Quick edit dotfiles
       btw = "echo I use NixOS, btw"; # Because we have to let everyone know
       nrs = "sudo nixos-rebuild switch --flake ~/nixos-dotfiles/#nixos-btw"; # Rebuild system
-      collect-garbage = "sudo nix-collect-garbage -d";
+      collect-garbage = "sudo nix-collect-garbage -d"; # Garbage collect the system
 
       # Config editing shortcuts
       edit-nixos = "nvim ~/nixos-dotfiles/modules/nixos/";
@@ -26,31 +24,35 @@
 
       # Utilities
       bm = "bashmount"; # Mount/unmount utility
+      install-copilot = "curl -fsSL https://gh.io/copilot-install | bash"; # Manual installation of Github Copilot CLI
+      copilot = "~/.local/bin/copilot"; # Github Copilot CLI (downloaded manually)
     };
 
     # Don't save these commands in history
     historyIgnore = [
       "ls"
       "exit"
+      "collect-garbage"
+      "nrs"
     ];
 
     # Additional bash configuration
     bashrcExtra = ''
       # Custom prompt: cyan user@host, green directory, light blue prompt
       export PS1="\[\e[38;5;75m\]\u@\h \[\e[38;5;113m\]\w \[\e[38;5;189m\]\$ \[\e[0m\]"
-      
+
       # Use Neovim as manpage viewer
       export MANPAGER="nvim +Man!"
-      
+
       # Use fd for faster file searching in fzf
       export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow'
-      
+
       # Initialize direnv (per-directory environments)
       eval "$(direnv hook bash)"
-      
+
       # Initialize zoxide (smart cd)
       eval "$(zoxide init bash)"
-      
+
       # Show system info on shell startup
       nitch
     '';

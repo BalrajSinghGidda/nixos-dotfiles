@@ -11,6 +11,7 @@ User-level configuration modules (no `sudo` required).
 
 ### Programs
 - **programs/gemini-cli.nix** - Gemini AI CLI configuration
+- **programs/nix-alien.nix** - nix-alien shell aliases (`na`, `nald`)
 
 ### Core Configuration
 - **git.nix** - Git and GitHub CLI setup
@@ -19,6 +20,15 @@ User-level configuration modules (no `sudo` required).
 ### Scripts
 - **devshell-scripts.nix** - Custom development environment creation scripts
 - **devshell-scripts/** - Script implementations
+
+## Recent Changes
+
+### nix-alien Integration (March 2026)
+Added convenience aliases for running unpatched binaries:
+- `na` - Short alias for `nix-alien`
+- `nald` - Short alias for `nix-alien-ld`
+
+The nix-alien package is installed at the system level, but user-friendly aliases are provided here.
 
 ## Making Changes
 

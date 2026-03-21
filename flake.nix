@@ -12,7 +12,13 @@
       # Ensure Home Manager uses the same nixpkgs as system
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # nix-alien: Tool for running unpatched binaries on NixOS
+    # Provides dynamic library loading for non-NixOS executables
     nix-alien.url = "github:thiagokokada/nix-alien";
+
+    # nvf: Neovim configuration framework
+    # Replaces manual Neovim config with declarative NixOS configuration
     nvf = {
       url = "github:NotAShelf/nvf";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -28,10 +34,13 @@
       modules = [
         # Import host-specific configuration
         ./hosts/nixos-btw
-	
-	nvf.nixosModules.default
-	
+
+        # Enable nvf (Neovim framework) as a NixOS module
+        # Configuration in modules/nixos/nvf.nix
+        nvf.nixosModules.default
+
         # Add nix-alien to system packages
+        # Enables running unpatched binaries with automatic library detection
         ({ pkgs, ... }: {
           environment.systemPackages = [
             nix-alien.packages.x86_64-linux.nix-alien

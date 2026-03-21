@@ -20,9 +20,12 @@
   programs.bash.blesh.enable = true; # Bash Line Editor SHell
 
   # Enable nix-ld for running unpatched binaries
+  # nix-ld provides a dynamic linker and common libraries for non-NixOS executables
+  # This is essential for running downloaded binaries, AppImages, and proprietary software
   programs.nix-ld = {
     enable = true;
     # Add common libraries that non-NixOS binaries might need
+    # These libraries are symlinked to /run/current-system/sw/share/nix-ld/lib/
     libraries = with pkgs; [
       # C/C++ standard libraries
       stdenv.cc.cc.lib
@@ -39,11 +42,11 @@
       openssl
       
       # X11 and graphics
-      libX11
-      libxext
-      libXrender
-      libXtst
-      libXi
+      xorg.libX11
+      xorg.libXext
+      xorg.libXrender
+      xorg.libXtst
+      xorg.libXi
       libglvnd
       mesa
       

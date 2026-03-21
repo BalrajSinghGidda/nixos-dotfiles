@@ -9,7 +9,7 @@
   # User identity - CHANGE THESE for your system!
   home.username = "balraj";
   home.homeDirectory = "/home/balraj";
-  
+
   # Home Manager state version - DON'T change this after initial setup
   home.stateVersion = "25.05";
 

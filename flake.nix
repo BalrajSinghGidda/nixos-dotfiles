@@ -5,7 +5,7 @@
   inputs = {
     # NixOS unstable channel (bleeding edge)
     nixpkgs.url = "nixpkgs/nixos-unstable";
-    
+
     # Home Manager for user-level configuration management
     home-manager = {
       url = "github:nix-community/home-manager/master";
@@ -22,7 +22,7 @@
       modules = [
         # Import host-specific configuration
         ./hosts/nixos-btw
-        
+
         # Enable Home Manager as a NixOS module
         home-manager.nixosModules.home-manager
         {

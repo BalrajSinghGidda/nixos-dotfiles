@@ -17,9 +17,9 @@
     # Use gh as git credential helper
     gitCredentialHelper.enable = true;
     settings = {
-      git_protocol = "https";  # Use HTTPS for git operations (change to "ssh" if you prefer)
-      prompt = "enabled";      # Enable interactive prompts
-      editor = "nvim";         # Default editor for gh commands
+      git_protocol = "https"; # Use HTTPS for git operations (change to "ssh" if you prefer)
+      prompt = "enabled"; # Enable interactive prompts
+      editor = "nvim"; # Default editor for gh commands
     };
   };
 }

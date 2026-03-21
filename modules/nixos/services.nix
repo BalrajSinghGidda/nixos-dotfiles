@@ -18,8 +18,8 @@
   services.displayManager.ly = {
     enable = true;
     settings = {
-      animation = "matrix";  # Matrix-style animation
-      bigclock = true;       # Show large clock on login
+      animation = "matrix"; # Matrix-style animation
+      bigclock = true; # Show large clock on login
     };
   };
 
@@ -31,7 +31,7 @@
   # PipeWire audio server (modern replacement for PulseAudio)
   services.pipewire = {
     enable = true;
-    pulse.enable = true;  # PulseAudio compatibility
+    pulse.enable = true; # PulseAudio compatibility
   };
 
   # Touchpad/trackpad support for laptops
@@ -61,15 +61,15 @@
   virtualisation.docker.enable = true;
   virtualisation.docker.rootless = {
     enable = true;
-    setSocketVariable = true;  # Set DOCKER_HOST environment variable
+    setSocketVariable = true; # Set DOCKER_HOST environment variable
   };
 
   # Bluetooth hardware support
   hardware.bluetooth.enable = true;
-  hardware.bluetooth.powerOnBoot = true;  # Turn on Bluetooth on boot
+  hardware.bluetooth.powerOnBoot = true; # Turn on Bluetooth on boot
   hardware.bluetooth.settings = {
     General = {
-      Experimental = true;  # Enable experimental features
+      Experimental = true; # Enable experimental features
     };
   };
 
@@ -79,8 +79,8 @@
   # Picom compositor (for transparency, shadows, animations)
   services.picom = {
     enable = true;
-    backend = "glx";  # OpenGL backend for better performance
-    vSync = true;     # Prevent screen tearing
+    backend = "glx"; # OpenGL backend for better performance
+    vSync = true; # Prevent screen tearing
   };
 
   # SSH server for remote access
@@ -88,5 +88,5 @@
 
   # Automatic system updates
   system.autoUpgrade.enable = true;
-  system.autoUpgrade.allowReboot = true;  # Allow automatic reboots after updates
+  system.autoUpgrade.allowReboot = true; # Allow automatic reboots after updates
 }

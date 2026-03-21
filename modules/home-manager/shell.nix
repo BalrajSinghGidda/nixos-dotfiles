@@ -4,34 +4,34 @@
   # Bash shell configuration
   programs.bash = {
     enable = true;
-    enableCompletion = true;  # Tab completion for commands
-    
+    enableCompletion = true; # Tab completion for commands
+
     # Custom shell aliases for convenience
     shellAliases = {
       # NixOS management
-      nc = "nvim ~/nixos-dotfiles/.";  # Quick edit dotfiles
-      btw = "echo I use NixOS, btw";   # Because we have to let everyone know
-      nrs = "sudo nixos-rebuild switch --flake ~/nixos-dotfiles/#nixos-btw";  # Rebuild system
-      
+      nc = "nvim ~/nixos-dotfiles/."; # Quick edit dotfiles
+      btw = "echo I use NixOS, btw"; # Because we have to let everyone know
+      nrs = "sudo nixos-rebuild switch --flake ~/nixos-dotfiles/#nixos-btw"; # Rebuild system
+
       # Config editing shortcuts
       edit-nixos = "nvim ~/nixos-dotfiles/modules/nixos/";
       edit-home = "nvim ~/nixos-dotfiles/modules/home-manager/";
       edit-host = "nvim ~/nixos-dotfiles/hosts/nixos-btw/";
-      
+
       # Enhanced file operations
       ls = "eza --long -ahF --no-user --no-permissions --git --icons=always --color=always --grid";
-      cd = "z";  # Use zoxide for smart directory jumping
-      
+      cd = "z"; # Use zoxide for smart directory jumping
+
       # Utilities
-      bm = "bashmount";  # Mount/unmount utility
+      bm = "bashmount"; # Mount/unmount utility
     };
-    
+
     # Don't save these commands in history
     historyIgnore = [
       "ls"
       "exit"
     ];
-    
+
     # Additional bash configuration
     bashrcExtra = ''
       # Custom prompt: cyan user@host, green directory, light blue prompt

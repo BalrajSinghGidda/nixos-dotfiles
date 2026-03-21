@@ -1,10 +1,7 @@
-{ pkgs, ... }:
-
-let
+{pkgs, ...}: let
   # Import custom wallpapers package
-  wallpapers = (pkgs.callPackage ./wallpapers.nix { });
-in
-{
+  wallpapers = pkgs.callPackage ./wallpapers.nix {};
+in {
   # System-wide packages available to all users
   environment.systemPackages = with pkgs; [
     # Core utilities
@@ -59,6 +56,9 @@ in
 
     # Custom packages
     wallpapers # Custom wallpaper collection
+    gruvbox-dark-gtk
+    capitaine-cursors-themed
+    gruvbox-plus-icons
   ];
 
   # Font configuration

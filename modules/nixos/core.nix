@@ -22,6 +22,9 @@
   # Firefox browser
   programs.firefox.enable = true;
 
+  # Enable nix-ld for running unpatched binaries
+  programs.nix-ld.enable = true;
+
   # Dell-specific kernel modules for proper hardware support
   boot.kernelModules = [
       "dell-wmi"              # WMI driver for Dell laptops

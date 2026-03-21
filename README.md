@@ -22,7 +22,6 @@ nixos-dotfiles/
 ├── hosts/                 # Host-specific configurations
 │   └── nixos-btw/        # This machine's config
 │       ├── default.nix          # Entry point
-│       ├── configuration.nix    # Host-specific settings
 │       ├── hardware-configuration.nix
 │       └── home.nix             # Home Manager config
 │

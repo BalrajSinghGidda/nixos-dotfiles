@@ -30,7 +30,7 @@
                 };
 
                 utility = {
-                    makdir.enable = true;
+                    mkdir.enable = true;
                     yazi-nvim.enable = true;
                 };
 

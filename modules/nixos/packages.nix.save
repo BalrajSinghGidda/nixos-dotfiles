@@ -22,6 +22,7 @@ in
     tmux # Traditional terminal multiplexer
 
     # Development tools
+    neovim # Modern Vim
     direnv # Per-directory environment variables
     redis # In-memory data store
 

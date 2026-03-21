@@ -13,6 +13,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nix-alien.url = "github:thiagokokada/nix-alien";
+    nvf = {
+      url = "github:NotAShelf/nvf";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   # Flake outputs - what this flake produces
@@ -20,14 +24,17 @@
     # System configuration for the "nixos-btw" host
     nixosConfigurations.nixos-btw = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
+      specialArgs = { inherit nix-alien; };
       modules = [
         # Import host-specific configuration
         ./hosts/nixos-btw
 
-	({ self, system, ... }: {
-            environment.systemPackages = with self.inputs.nix-alien.packages.${system}; [
-              nix-alien
-            ];
+        # Add nix-alien to system packages
+        ({ pkgs, ... }: {
+          environment.systemPackages = [
+            nix-alien.packages.x86_64-linux.nix-alien
+          ];
+        })
 
         # Enable Home Manager as a NixOS module
         home-manager.nixosModules.home-manager

@@ -23,7 +23,58 @@
   programs.firefox.enable = true;
 
   # Enable nix-ld for running unpatched binaries
-  programs.nix-ld.enable = true;
+  programs.nix-ld = {
+    enable = true;
+    # Add common libraries that non-NixOS binaries might need
+    libraries = with pkgs; [
+      # C/C++ standard libraries
+      stdenv.cc.cc.lib
+      glibc
+      
+      # Common system libraries
+      zlib
+      zstd
+      xz
+      bzip2
+      gzip
+      
+      # SSL/TLS
+      openssl
+      
+      # X11 and graphics
+      xorg.libX11
+      xorg.libXext
+      xorg.libXrender
+      xorg.libXtst
+      xorg.libXi
+      libglvnd
+      mesa
+      
+      # Audio
+      alsa-lib
+      libpulseaudio
+      
+      # Other common dependencies
+      libcap
+      attr
+      acl
+      fontconfig
+      freetype
+      dbus
+      systemd
+      
+      # Development libraries
+      curl
+      expat
+      libxml2
+      
+      # For running FHS binaries
+      glib
+      nspr
+      nss
+      util-linux
+    ];
+  };
 
   # Dell-specific kernel modules for proper hardware support
   boot.kernelModules = [

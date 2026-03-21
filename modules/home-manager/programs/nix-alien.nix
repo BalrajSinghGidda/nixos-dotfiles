@@ -2,15 +2,18 @@
 
 {
   # Nix-alien is a tool for running unpatched binaries on NixOS
-  # Instead of using fetchTarball which requires SHA, we'll use the package from nixpkgs if available
-  # or install it via the nix-ld mechanism
-
-  # For now, commenting this out as it causes build errors
-  # Users can install nix-alien manually if needed: nix-env -iA nixpkgs.nix-alien
-
-  # home.packages = [
-  #   pkgs.nix-alien or null
-  # ];
-
-  # Note: programs.nix-ld.enable is set at the system level in modules/nixos/core.nix
+  # It's installed at the system level via the flake.nix input
+  # This module is kept for documentation and future configurations
+  
+  # Note: 
+  # - nix-alien is added via flake.nix using the nix-alien flake input
+  # - programs.nix-ld.enable is set at the system level in modules/nixos/core.nix
+  # - To use: nix-alien <binary-name> or nix-alien-ld <binary>
+  
+  # Shell aliases for convenience
+  programs.bash.shellAliases = {
+    # Make nix-alien easier to use
+    "na" = "nix-alien";
+    "nald" = "nix-alien-ld";
+  };
 }

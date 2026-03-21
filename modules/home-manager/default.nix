@@ -9,6 +9,7 @@
     
     # Program-specific configurations
     ./programs/gemini-cli.nix  # Gemini AI CLI
+    ./programs/nix-alien.nix   # Nix-Alien Package
     
     # Core configurations
     ./git.nix    # Git and GitHub configuration

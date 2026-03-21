@@ -47,7 +47,7 @@
 
                 languages = {
                     enableTreesitter = true;
-                    enableeFormat = true;
+                    enableFormat = true;
                     enableDAP = true;
 
                     python.enable = true;

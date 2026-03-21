@@ -1,6 +1,7 @@
 # Application Configurations
 
-This directory contains dotfiles for various applications, managed by Home Manager.
+This directory contains dotfiles for various applications, managed by Home
+Manager.
 
 ## Applications
 
@@ -8,13 +9,14 @@ This directory contains dotfiles for various applications, managed by Home Manag
 - **rofi/** - Rofi launcher theme
 - **picom/** - Picom compositor settings
 - **kitty/** - Kitty terminal emulator configuration
-- **.blerc** - ble.sh colorscheme based on gruvbox
 
 ## Important Note: Neovim Configuration
 
 **Neovim is no longer configured through this directory.**
 
-As of March 2026, Neovim configuration has been migrated to the **nvf** framework:
+As of March 2026, Neovim configuration has been migrated to the **nvf**
+framework:
+
 - Configuration location: `modules/nixos/nvf.nix`
 - All plugins, LSP servers, and settings are managed declaratively through NixOS
 - The previous `config/nvim/` directory with Lua files has been removed

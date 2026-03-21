@@ -57,6 +57,7 @@ in
 
     # Productivity
     libreoffice # Office suite
+    nix-alien   # Nix Alien
 
     # Custom packages
     wallpapers # Custom wallpaper collection

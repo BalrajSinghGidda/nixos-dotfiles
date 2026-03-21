@@ -12,16 +12,22 @@
       # Ensure Home Manager uses the same nixpkgs as system
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nix-alien.url = "github:thiagokokada/nix-alien";
   };
 
   # Flake outputs - what this flake produces
-  outputs = { self, nixpkgs, home-manager, ... }: {
+  outputs = { self, nixpkgs, home-manager, nix-alien, ... }: {
     # System configuration for the "nixos-btw" host
     nixosConfigurations.nixos-btw = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       modules = [
         # Import host-specific configuration
         ./hosts/nixos-btw
+
+	({ self, system, ... }: {
+            environment.systemPackages = with self.inputs.nix-alien.packages.${system}; [
+              nix-alien
+            ];
 
         # Enable Home Manager as a NixOS module
         home-manager.nixosModules.home-manager

@@ -12,11 +12,13 @@
       nc = "nvim ~/nixos-dotfiles/."; # Quick edit dotfiles
       btw = "echo I use NixOS, btw"; # Because we have to let everyone know
       nrs = "sudo nixos-rebuild switch --flake ~/nixos-dotfiles/#nixos-btw"; # Rebuild system
+      collect-garbage = "sudo nix-collect-garbage -d";
 
       # Config editing shortcuts
       edit-nixos = "nvim ~/nixos-dotfiles/modules/nixos/";
       edit-home = "nvim ~/nixos-dotfiles/modules/home-manager/";
       edit-host = "nvim ~/nixos-dotfiles/hosts/nixos-btw/";
+      edit-nvf = "nvim ~/nixos-dotfiles/modules/nixos/nvf.nix";
 
       # Enhanced file operations
       ls = "eza --long -ahF --no-user --no-permissions --git --icons=always --color=always --grid";

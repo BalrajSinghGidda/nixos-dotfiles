@@ -9,11 +9,14 @@
                 vimAlias = false;
                 theme = {
                     enable = true;
-                    name = "gruvbox";
-                    style = "dark";
+                    name = "tokyonight";
+                    style = "night";
                 };
                 languages = {
+                    enableTreesitter = true;
+
                     nix.enable = true;
+                    python.enable = true;
                 };
                 lsp = {
                     enable = true;

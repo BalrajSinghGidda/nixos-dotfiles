@@ -9,7 +9,6 @@
 
     # Program-specific configurations
     ./programs/gemini-cli.nix # Gemini AI CLI
-    ./programs/nvf.nix # Neovim
     ./programs/nix-alien.nix # Nix-Alien Package
 
     # Core configurations

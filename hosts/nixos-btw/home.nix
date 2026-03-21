@@ -15,7 +15,6 @@
 
   # Manage application dotfiles using XDG Base Directory specification
   # These files are copied to the Nix store and symlinked to ~/.config/
-  xdg.configFile."nvim".source = ../../config/nvim;
   xdg.configFile."qtile".source = ../../config/qtile;
   xdg.configFile."rofi".source = ../../config/rofi;
   xdg.configFile."picom".source = ../../config/picom;

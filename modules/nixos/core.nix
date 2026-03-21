@@ -19,9 +19,6 @@
   programs.bash.completion.enable = true;
   programs.bash.blesh.enable = true; # Bash Line Editor SHell
 
-  # Firefox browser
-  programs.firefox.enable = true;
-
   # Enable nix-ld for running unpatched binaries
   programs.nix-ld = {
     enable = true;
@@ -42,11 +39,11 @@
       openssl
       
       # X11 and graphics
-      xorg.libX11
-      xorg.libXext
-      xorg.libXrender
-      xorg.libXtst
-      xorg.libXi
+      libX11
+      libxext
+      libXrender
+      libXtst
+      libXi
       libglvnd
       mesa
       

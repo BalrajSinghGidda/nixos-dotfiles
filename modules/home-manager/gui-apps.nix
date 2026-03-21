@@ -5,5 +5,7 @@
   home.packages = with pkgs; [
     # Package management
     flatpak # Universal package manager
+    pcmanfm
+    google-chrome
   ];
 }

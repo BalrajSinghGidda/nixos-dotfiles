@@ -4,7 +4,6 @@ This directory contains dotfiles for various applications, managed by Home Manag
 
 ## Applications
 
-- **nvim/** - Neovim configuration
 - **qtile/** - Qtile window manager configuration
 - **rofi/** - Rofi launcher theme
 - **picom/** - Picom compositor settings
@@ -17,7 +16,6 @@ These configurations are symlinked to `~/.config/` by Home Manager.
 The linking is configured in `hosts/nixos-btw/home.nix`:
 
 ```nix
-xdg.configFile."nvim".source = ../../config/nvim;
 xdg.configFile."qtile".source = ../../config/qtile;
 # etc...
 ```

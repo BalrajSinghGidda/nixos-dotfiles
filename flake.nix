@@ -20,7 +20,7 @@
   };
 
   # Flake outputs - what this flake produces
-  outputs = { self, nixpkgs, home-manager, nix-alien, ... }: {
+  outputs = { self, nixpkgs, home-manager, nix-alien, nvf, ... }: {
     # System configuration for the "nixos-btw" host
     nixosConfigurations.nixos-btw = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
@@ -28,7 +28,9 @@
       modules = [
         # Import host-specific configuration
         ./hosts/nixos-btw
-
+	
+	nvf.nixosModules.default
+	
         # Add nix-alien to system packages
         ({ pkgs, ... }: {
           environment.systemPackages = [

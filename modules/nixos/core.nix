@@ -1,6 +1,4 @@
-{ pkgs, ... }:
-
-{
+{pkgs, ...}: {
   # Bootloader configuration
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -30,30 +28,30 @@
       # C/C++ standard libraries
       stdenv.cc.cc.lib
       glibc
-      
+
       # Common system libraries
       zlib
       zstd
       xz
       bzip2
       gzip
-      
+
       # SSL/TLS
       openssl
-      
+
       # X11 and graphics
-      xorg.libX11
-      xorg.libXext
-      xorg.libXrender
-      xorg.libXtst
-      xorg.libXi
+      libX11
+      libxext
+      libXrender
+      libXtst
+      libXi
       libglvnd
       mesa
-      
+
       # Audio
       alsa-lib
       libpulseaudio
-      
+
       # Other common dependencies
       libcap
       attr
@@ -62,12 +60,12 @@
       freetype
       dbus
       systemd
-      
+
       # Development libraries
       curl
       expat
       libxml2
-      
+
       # For running FHS binaries
       glib
       nspr
@@ -89,14 +87,14 @@
   # User account configuration - CHANGE 'balraj' to your username!
   users.users.balraj = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "networking" ]; # wheel = sudo access
+    extraGroups = ["wheel" "networking"]; # wheel = sudo access
     packages = with pkgs; [
       tree # Directory tree visualization
     ];
   };
 
   # Enable Nix flakes and new nix command
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = ["nix-command" "flakes"];
 
   # NixOS state version - DON'T change after initial installation
   # This is the version you initially installed, not the channel you're using

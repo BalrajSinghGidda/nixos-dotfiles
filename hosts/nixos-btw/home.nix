@@ -19,4 +19,5 @@
   xdg.configFile."rofi".source = ../../config/rofi;
   xdg.configFile."picom".source = ../../config/picom;
   xdg.configFile."kitty".source = ../../config/kitty;
+  xdg.configFile.".blerc".source = ../../config/.blerc;
 }

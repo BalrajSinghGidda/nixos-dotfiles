@@ -8,6 +8,7 @@ This directory contains dotfiles for various applications, managed by Home Manag
 - **rofi/** - Rofi launcher theme
 - **picom/** - Picom compositor settings
 - **kitty/** - Kitty terminal emulator configuration
+- **.blerc** - ble.sh colorscheme based on gruvbox
 
 ## Important Note: Neovim Configuration
 

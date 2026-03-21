@@ -38,8 +38,8 @@
 
     # Additional bash configuration
     bashrcExtra = ''
-      # Custom prompt: cyan user@host, green directory, light blue prompt
-      export PS1="\[\e[38;5;75m\]\u@\h \[\e[38;5;113m\]\w \[\e[38;5;189m\]\$ \[\e[0m\]"
+      # Custom gruvbox prompt: green user@host, teal directory, orange prompt
+      export PS1="\[\e[38;5;142m\]\u@\h \[\e[38;5;108m\]\w \[\e[38;5;214m\]\$ \[\e[0m\]"
 
       # Use Neovim as manpage viewer
       export MANPAGER="nvim +Man!"

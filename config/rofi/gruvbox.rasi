@@ -8,7 +8,7 @@
     hv: #d3869b; 
     primary: #504945;  // Gruvbox gray
     ug: #3c3836;
-    font: "Lilex Nerd Font 16";
+    font: "Lilex Nerd Font 14";
     background-color: @bg;
     border: 0px;
     kl: #83a598;

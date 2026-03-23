@@ -1,6 +1,4 @@
-{ pkgs, ... }:
-
-{
+{pkgs, ...}: {
   # X11 display server configuration
   services.xserver = {
     enable = true;
@@ -26,7 +24,7 @@
   # CUPS printing system
   services.printing.enable = true;
   # Canon printer drivers
-  services.printing.drivers = [ pkgs.cnijfilter2 ];
+  services.printing.drivers = [pkgs.cnijfilter2];
 
   # PipeWire audio server (modern replacement for PulseAudio)
   services.pipewire = {
@@ -40,7 +38,7 @@
   # XDG Desktop Portal (for screen sharing, file pickers, etc.)
   xdg.portal = {
     enable = true;
-    config.common.default = [ "*" ];
+    config.common.default = ["*"];
   };
 
   # Flatpak support for additional app installation
@@ -49,11 +47,17 @@
   # Tailscale VPN service
   services.tailscale.enable = true;
 
+  # MariaDB service
+  services.mysql = {
+    enable = true;
+    package = pkgs.mariadb;
+  };
+
   # Bluetooth MPRIS media control proxy
   systemd.user.services.mpris-proxy = {
     description = "Mpris proxy";
-    after = [ "network.target" "sound.target" ];
-    wantedBy = [ "default.target" ];
+    after = ["network.target" "sound.target"];
+    wantedBy = ["default.target"];
     serviceConfig.ExecStart = "${pkgs.bluez}/bin/mpris-proxy";
   };
 

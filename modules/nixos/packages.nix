@@ -56,6 +56,7 @@ in {
 
     # Custom packages
     wallpapers # Custom wallpaper collection
+    gruvbox-gtk-theme
     gruvbox-dark-gtk
     capitaine-cursors-themed
     gruvbox-plus-icons

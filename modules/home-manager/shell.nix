@@ -19,7 +19,8 @@
       edit-nvf = "nvim ~/nixos-dotfiles/modules/nixos/nvf.nix";
 
       # Enhanced file operations
-      ls = "eza --long -ahF --no-user --no-permissions --git --icons=always --color=always --grid";
+      ls = "eza --long -hF --no-user --no-permissions --git --icons=always --color=always --grid";
+      la = "eza --long -ahF --no-user --no-permissions --git --icons=always --color=always --grid";
       cd = "z"; # Use zoxide for smart directory jumping
 
       # Utilities

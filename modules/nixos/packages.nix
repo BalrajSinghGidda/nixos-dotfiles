@@ -1,6 +1,8 @@
 {pkgs, ...}: let
   # Import custom wallpapers package
   wallpapers = pkgs.callPackage ./wallpapers.nix {};
+  # Import Apple fonts package
+  apple-fonts = pkgs.callPackage ./apple-fonts.nix {};
 in {
   # System-wide packages available to all users
   environment.systemPackages = with pkgs; [
@@ -74,5 +76,19 @@ in {
     # Microsoft fonts
     corefonts # Arial, Times New Roman, etc.
     vista-fonts # Calibri, Cambria, etc.
+
+    # Apple fonts
+    apple-fonts
+
+    # Additional fonts
+    noto-fonts
+    noto-fonts-cjk-sans
+    noto-fonts-color-emoji
+    liberation_ttf
+    fira-code
+    fira-code-symbols
+    mplus-outline-fonts.githubRelease
+    dina-font
+    proggyfonts
   ];
 }

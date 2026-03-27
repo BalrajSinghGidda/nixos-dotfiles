@@ -35,6 +35,9 @@
   # Touchpad/trackpad support for laptops
   services.libinput.enable = true;
 
+  services.udisks2.enable = true;
+  services.gvfs.enable = true;
+
   # XDG Desktop Portal (for screen sharing, file pickers, etc.)
   xdg.portal = {
     enable = true;

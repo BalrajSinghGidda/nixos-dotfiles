@@ -1,17 +1,17 @@
 /*
- * Gruvbox Dark colorscheme (converted from Tokyonight)
+ * Custom Color Scheme
  */
 
 // define colors etc.
 * {
-    bg: #282828;
-    hv: #d3869b; 
-    primary: #504945;  // Gruvbox gray
-    ug: #3c3836;
+    bg: #0f0f0f;
+    hv: #ebadd6; 
+    primary: #3b403c;  // bright black
+    ug: #1e1f1e;
     font: "Lilex Nerd Font 14";
     background-color: @bg;
     border: 0px;
-    kl: #83a598;
+    kl: #b0d4e8;
     black: #000000;
 
     transparent: rgba(46,52,64,0);

@@ -148,16 +148,16 @@ for i in groups:
 # ]
 
 colors = [
-    ["#282828", "#282828"],  # bg
-    ["#ebdbb2", "#ebdbb2"],  # fg
-    ["#3c3836", "#3c3836"],  # bg1 / subtle contrast
-    ["#fb4934", "#fb4934"],  # red
-    ["#b8bb26", "#b8bb26"],  # green
-    ["#fabd2f", "#fabd2f"],  # yellow
-    ["#83a598", "#83a598"],  # blue
-    ["#d3869b", "#d3869b"],  # purple
-    ["#8ec07c", "#8ec07c"],  # aqua
-    ["#504945", "#504945"],  # gray
+    ["#0f0f0f", "#0f0f0f"],  # bg
+    ["#f4decd", "#f4decd"],  # fg
+    ["#1e1f1e", "#1e1f1e"],  # bg1 / subtle contrast
+    ["#ef968f", "#ef968f"],  # red (bright)
+    ["#a4daa4", "#a4daa4"],  # green (bright)
+    ["#f4b585", "#f4b585"],  # yellow (bright)
+    ["#b0d4e8", "#b0d4e8"],  # blue (bright)
+    ["#ebadd6", "#ebadd6"],  # purple (bright magenta)
+    ["#abd4bf", "#abd4bf"],  # aqua (bright cyan)
+    ["#3b403c", "#3b403c"],  # gray (bright black)
 ]
 
 

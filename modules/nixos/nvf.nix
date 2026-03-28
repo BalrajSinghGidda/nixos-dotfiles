@@ -54,8 +54,8 @@
           enable = false;
         };
 
-        # Custom colorscheme via extraConfigLuaPre
-        extraConfigLuaPre = ''
+        # Custom colorscheme via luaConfigPre
+        luaConfigPre = ''
           -- Custom colorscheme based on new1.md
           vim.cmd([[
             hi clear

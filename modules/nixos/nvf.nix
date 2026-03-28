@@ -56,6 +56,9 @@
 
         # Custom colorscheme via luaConfigPre
         luaConfigPre = ''
+          -- Disable transparency
+          vim.g.transparent_enabled = false
+          
           -- Custom colorscheme based on new1.md
           vim.cmd([[
             hi clear
@@ -65,8 +68,10 @@
             set background=dark
             let g:colors_name = "custom"
 
-            " Base colors
+            " Base colors - explicitly opaque
             hi Normal guifg=#f4decd guibg=#0f0f0f
+            hi NormalFloat guifg=#f4decd guibg=#0f0f0f
+            hi NormalNC guifg=#f4decd guibg=#0f0f0f
             hi Visual guifg=#0f0f0f guibg=#f4decd
             hi Cursor guifg=#0f0f0f guibg=#f4decd
             hi CursorLine guibg=#1e1f1e

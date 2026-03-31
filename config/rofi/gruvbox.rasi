@@ -8,7 +8,7 @@
     hv: #ebadd6; 
     primary: #3b403c;  // bright black
     ug: #1e1f1e;
-    font: "Lilex Nerd Font 14";
+    font: "JetBrainsMono Nerd Font 14";
     background-color: @bg;
     border: 0px;
     kl: #b0d4e8;

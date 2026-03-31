@@ -211,7 +211,11 @@ screens = [
                         "Button1": lambda: qtile.cmd_spawn("qtilekeys-yad")
                     },
                 ),
-                widget.Prompt(font="Ubuntu Mono", fontsize=14, foreground=colors[1]),
+                widget.Prompt(
+                    font="JetBrainsMono Nerd Font Mono",
+                    fontsize=14,
+                    foreground=colors[1],
+                ),
                 widget.GroupBox(
                     fontsize=18,
                     margin_y=5,
@@ -344,9 +348,9 @@ mouse = [
 dgroups_key_binder = None
 dgroups_app_rules = []  # type: list
 follow_mouse_focus = True
-bring_front_click = False
+bring_front_click = True
 floats_kept_above = True
-cursor_warp = False
+cursor_warp = True
 floating_layout = layout.Floating(
     float_rules=[
         # Run the utility of `xprop` to see the wm class and name of an X client.
@@ -372,6 +376,6 @@ wl_input_rules = None
 
 # xcursor theme (string or None) and size (integer) for Wayland backend
 wl_xcursor_theme = None
-wl_xcursor_size = 24
+wl_xcursor_size = 32
 
 wmname = "LG3D"

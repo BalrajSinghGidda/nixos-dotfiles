@@ -9,27 +9,11 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "nixos-server-btw";
+  networking.hostName = "servos";
   networking.networkmanager.enable = true;
 
   time.timeZone = "Asia/Kolkata";
 
-  services.xserver = {
-    enable = true;
-    autoRepeatDelay = 200;
-    autoRepeatInterval = 35;
-    windowManager.qtile.enable = true;
-    displayManager.sessionCommands = ''
-      xwallpaper --zoom /etc/walls/nix.png'';
-  };
-
-  services.displayManager.ly = {
-    enable = true;
-    settings = {
-      animation = "matrix";
-      bigclock = true;
-    };
-  };
   nixpkgs.config.allowUnfree = true;
 
   services.printing.enable = true;
@@ -46,8 +30,6 @@
     config.common.default = [ "*" ];
   };
 
-  services.flatpak.enable = true;
-
   programs.bash.completion.enable = true;
   programs.bash.blesh.enable = true;
 
@@ -61,16 +43,14 @@
     ];
   };
 
-  programs.firefox.enable = true;
-
-#  boot.kernelModules = [
-#      "dell-wmi"
-#      "dell-wmi-sysman"
-#      "dell-smbios"
-#      "dell-wmi-descriptor"
-#      "video"
-#      "sparse-keymap"
-#  ];
+  boot.kernelModules = [
+      "dell-wmi"
+      "dell-wmi-sysman"
+      "dell-smbios"
+      "dell-wmi-descriptor"
+      "video"
+      "sparse-keymap"
+  ];
 
   systemd.user.services.mpris-proxy = {
     description = "Mpris proxy";
@@ -92,33 +72,16 @@
       git
       lazygit
       gh
-      kitty
       neovim
       zellij
       tmux
-      picom
-      rofi
-      redis
-      xwallpaper
       oh-my-posh
-      brightnessctl
-      pamixer
       direnv
-      libnotify
       udisks2
-      eject
-      dunst
-      maim
-      slop
-      xbindkeys
       alsa-utils
       libinput
       blueman
       bluez
-      xclip
-      xcb-util-cursor
-      libreoffice
-      feh
       ];
 
   fonts.fontDir.enable = true;
@@ -141,12 +104,6 @@
   };
 
   services.blueman.enable = true;
-
-  services.picom = {
-    enable = true;
-    backend = "glx";
-    vSync = true;
-  };
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 

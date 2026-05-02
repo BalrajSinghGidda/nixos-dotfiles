@@ -5,11 +5,6 @@ let
   bin = "${config.home.homeDirectory}/nixos-dotfiles/bin";
   create_symlink = path: config.lib.file.mkOutOfStoreSymlink path;
   configs = {
-    nvim = "nvim";
-    qtile = "qtile";
-    rofi = "rofi";
-    picom = "picom";
-    kitty = "kitty";
   };
 in
 
@@ -57,13 +52,6 @@ in
 
   programs.gh = {
     enable = true;
-    gitCredentialHelper = { 
-      enable = true; 
-      hosts = [
-        "https://github.com"
-        "https://gist.github.com"
-      ];
-    };
     settings = {
       git_protocol = "https";
       prompt = "enable";
@@ -75,11 +63,9 @@ in
     enable = true;
     settings = {
       "theme" = "Default";
-      "vimMode" = true;
       "preferredEditor" = "nvim";
       "autoAccept" = true;
     };
-    defaultModel = "gemini-2.5-pro";
   };
 
   xdg.configFile = builtins.mapAttrs
@@ -89,10 +75,6 @@ in
     })
     configs;
 
-#  xdg.configFile."qtile" = {
-#   source = create_symlink "${dotfiles}/qtile"; 
-#   recursive = true;
-#
 #      (pkgs.writeShellApplication {
 #       name = "ns";
 #       runtimeInputs = with pkgs; [
@@ -102,8 +84,6 @@ in
 #       text = builtins.readFile "${pkgs.nix-search-tv.src}/nixpkgs.sh";
 #       })
 #
-#  VV
-
   home.packages = with pkgs; [
     ripgrep
       nil
@@ -111,7 +91,6 @@ in
       nodejs
       gcc 
       yazi
-      flatpak
       eza
       zoxide
       python313Packages.euporie

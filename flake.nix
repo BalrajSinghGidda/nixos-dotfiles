@@ -1,5 +1,5 @@
 {
-	description = "NixOS Server on Asus X55U";
+	description = "NixOS Server on Dell Latitude 7490";
 	inputs = {
 		nixpkgs.url = "nixpkgs/nixos-25.11";
 		home-manager = {
@@ -9,7 +9,7 @@
 	};
 	
 	outputs = { self, nixpkgs, home-manager, ... } : {
-		nixosConfigurations.nixos-server-btw = nixpkgs.lib.nixosSystem {
+		nixosConfigurations.servos = nixpkgs.lib.nixosSystem {
 			system = "x86_64-linux";
 			modules = [
 				./configuration.nix

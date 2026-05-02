@@ -34,11 +34,10 @@ in
     ];
     bashrcExtra = ''
       export PS1="\[\e[38;5;75m\]\u@\h \[\e[38;5;113m\]\w \[\e[38;5;189m\]\$ \[\e[0m\]"
-      export MANPAGER="nvim +Man!"
       export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow'
       eval "$(direnv hook bash)"
       eval "$(zoxide init bash)"
-      export POSH_SESSION_ID="5019232b-7132-4b5d-a914-4ddc9b73b2a3";source $'/home/balraj/.cache/oh-my-posh/init.8949049596678462984.sh'
+      eval "$(oh-my-posh init bash --config hul10)"
       nitch
     '';
   };

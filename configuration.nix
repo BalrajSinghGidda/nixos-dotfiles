@@ -38,7 +38,12 @@
     ];
   };
 
-  boot.kernelParams = [ "consoleblank=10" ];
+  boot.kernelParams = [
+    "consoleblank=10"
+    "i915.enable_dc=0"      # Disables Display Power Saving to prevent hangs
+    "i915.enable_psr=0"     # Disables Panel Self Refresh
+    "intel_idle.max_cstate=1" # Limits CPU sleep states (prevents deep sleep freezes)
+  ];
 
   services.logind.settings.Login = {
       HandleLidSwitch = "ignore";

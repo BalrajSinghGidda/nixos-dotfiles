@@ -25,11 +25,6 @@
 
   services.libinput.enable = true;
 
-  xdg.portal = {
-    enable = true;
-    config.common.default = [ "*" ];
-  };
-
   programs.bash.completion.enable = true;
   programs.bash.blesh.enable = true;
 
@@ -41,6 +36,14 @@
     packages = with pkgs; [
       tree
     ];
+  };
+
+  boot.kernelParams = [ "consoleblank=10" ];
+
+  services.logind.settings.Login = {
+      HandleLidSwitch = "ignore";
+      HandleLidSwitchDocked = "ignore";
+      HandleLidSwitchExternalPower = "ignore";
   };
 
   boot.kernelModules = [

@@ -19,14 +19,14 @@ in
     shellAliases = {
       nc = "nvim ~/nixos-dotfiles/.";
       btw = "echo I use NixOS, btw";
-      nrs = "sudo nixos-rebuild switch --flake ~/nixos-dotfiles/#nixos-server-btw";
+      nrs = "sudo nixos-rebuild switch --flake ~/nixos-dotfiles/#servos";
+      sysclean = "sudo nix-collect-garbage -d";
       edit-config = "nvim ~/nixos-dotfiles/configuration.nix";
       edit-home-config = "nvim ~/nixos-dotfiles/home.nix";
       make-py-devshell = "bash ${bin}/make-py-devshell";
       make-cpp-devshell = "bash ${bin}/make-cpp-devshell";
       ls = "eza --long -ahF --no-user --no-permissions --git --icons=always --color=always --grid";
       cd = "z";
-      bm = "bashmount";
     };
     historyIgnore = [
       "ls"

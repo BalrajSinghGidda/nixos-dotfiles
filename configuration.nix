@@ -73,6 +73,12 @@
     setSocketVariable = true;
   };
 
+  virtualisation.oci-containers.containers.homepage = {
+    image = "ghcr.io/gethomepage/homepage:latest";
+    ports = [ "3000:3000" ];
+    volumes = [ "/srv/homepage-config:/app/config" ];
+  };
+
   environment.systemPackages = with pkgs; [
       vim
       wget

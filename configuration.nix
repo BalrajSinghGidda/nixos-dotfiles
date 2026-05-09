@@ -76,7 +76,14 @@
   virtualisation.oci-containers.containers.homepage = {
     image = "ghcr.io/gethomepage/homepage:latest";
     ports = [ "3000:3000" ];
-    volumes = [ "/srv/homepage-config:/app/config" ];
+    volumes = [
+    	"/srv/homepage-config:/app/config"
+	"/var/run/docker.sock:/var/run/docker.sock"
+    ];
+
+    environment = {
+  HOMEPAGE_ALLOWED_HOSTS = "*";
+};
   };
 
   environment.systemPackages = with pkgs; [

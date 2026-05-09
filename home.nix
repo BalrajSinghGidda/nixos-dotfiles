@@ -1,14 +1,14 @@
-{ config, pkgs, ... }:
-
-let
+{
+  config,
+  pkgs,
+  ...
+}: let
   dotfiles = "${config.home.homeDirectory}/nixos-dotfiles/config";
   bin = "${config.home.homeDirectory}/nixos-dotfiles/bin";
   create_symlink = path: config.lib.file.mkOutOfStoreSymlink path;
   configs = {
   };
-in
-
-{
+in {
   home.username = "balraj";
   home.homeDirectory = "/home/balraj";
   home.stateVersion = "25.05";
@@ -59,38 +59,34 @@ in
 
   programs.gemini-cli = {
     enable = true;
-    settings = {
-      "theme" = "Default";
-      "preferredEditor" = "nvim";
-      "autoAccept" = true;
-    };
   };
 
-  xdg.configFile = builtins.mapAttrs
+  xdg.configFile =
+    builtins.mapAttrs
     (name: subpath: {
       source = create_symlink "${dotfiles}/${subpath}";
       recursive = true;
     })
     configs;
 
-#      (pkgs.writeShellApplication {
-#       name = "ns";
-#       runtimeInputs = with pkgs; [
-#       fzf
-#       nix-search-tv
-#       ];
-#       text = builtins.readFile "${pkgs.nix-search-tv.src}/nixpkgs.sh";
-#       })
-#
+  #      (pkgs.writeShellApplication {
+  #       name = "ns";
+  #       runtimeInputs = with pkgs; [
+  #       fzf
+  #       nix-search-tv
+  #       ];
+  #       text = builtins.readFile "${pkgs.nix-search-tv.src}/nixpkgs.sh";
+  #       })
+  #
   home.packages = with pkgs; [
     ripgrep
-      nil
-      nixpkgs-fmt
-      nodejs
-      gcc 
-      yazi
-      eza
-      zoxide
-      python313Packages.euporie
-      ];
+    nil
+    nixpkgs-fmt
+    nodejs
+    gcc
+    yazi
+    eza
+    zoxide
+    python313Packages.euporie
+  ];
 }

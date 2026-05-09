@@ -1,10 +1,12 @@
-{ config, lib, pkgs, ... }:
-
 {
-  imports =
-    [
+  config,
+  lib,
+  pkgs,
+  ...
+}: {
+  imports = [
     ./hardware-configuration.nix
-    ];
+  ];
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -32,7 +34,7 @@
 
   users.users.balraj = {
     isNormalUser = true;
-    extraGroups = [ "wheel" ];
+    extraGroups = ["wheel"];
     packages = with pkgs; [
       tree
     ];
@@ -40,30 +42,30 @@
 
   boot.kernelParams = [
     "consoleblank=10"
-    "i915.enable_dc=0"      # Disables Display Power Saving to prevent hangs
-    "i915.enable_psr=0"     # Disables Panel Self Refresh
+    "i915.enable_dc=0" # Disables Display Power Saving to prevent hangs
+    "i915.enable_psr=0" # Disables Panel Self Refresh
     "intel_idle.max_cstate=1" # Limits CPU sleep states (prevents deep sleep freezes)
   ];
 
   services.logind.settings.Login = {
-      HandleLidSwitch = "ignore";
-      HandleLidSwitchDocked = "ignore";
-      HandleLidSwitchExternalPower = "ignore";
+    HandleLidSwitch = "ignore";
+    HandleLidSwitchDocked = "ignore";
+    HandleLidSwitchExternalPower = "ignore";
   };
 
   boot.kernelModules = [
-      "dell-wmi"
-      "dell-wmi-sysman"
-      "dell-smbios"
-      "dell-wmi-descriptor"
-      "video"
-      "sparse-keymap"
+    "dell-wmi"
+    "dell-wmi-sysman"
+    "dell-smbios"
+    "dell-wmi-descriptor"
+    "video"
+    "sparse-keymap"
   ];
 
   systemd.user.services.mpris-proxy = {
     description = "Mpris proxy";
-    after = [ "network.target" "sound.target" ];
-    wantedBy = [ "default.target" ];
+    after = ["network.target" "sound.target"];
+    wantedBy = ["default.target"];
     serviceConfig.ExecStart = "${pkgs.bluez}/bin/mpris-proxy";
   };
 
@@ -75,35 +77,35 @@
 
   virtualisation.oci-containers.containers.homepage = {
     image = "ghcr.io/gethomepage/homepage:latest";
-    ports = [ "3000:3000" ];
+    ports = ["3000:3000"];
     volumes = [
-    	"/srv/homepage-config:/app/config"
-	"/var/run/docker.sock:/var/run/docker.sock"
+      "/srv/homepage-config:/app/config"
+      "/var/run/docker.sock:/var/run/docker.sock"
     ];
 
     environment = {
-  HOMEPAGE_ALLOWED_HOSTS = "*";
-};
+      HOMEPAGE_ALLOWED_HOSTS = "*";
+    };
   };
 
   environment.systemPackages = with pkgs; [
-      vim
-      wget
-      nitch
-      git
-      lazygit
-      gh
-      neovim
-      zellij
-      tmux
-      oh-my-posh
-      direnv
-      udisks2
-      alsa-utils
-      libinput
-      blueman
-      bluez
-      ];
+    vim
+    wget
+    nitch
+    git
+    lazygit
+    gh
+    zellij
+    forgejo-cli
+    tmux
+    oh-my-posh
+    direnv
+    udisks2
+    alsa-utils
+    libinput
+    blueman
+    bluez
+  ];
 
   fonts.fontDir.enable = true;
 
@@ -126,7 +128,7 @@
 
   services.blueman.enable = true;
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = ["nix-command" "flakes"];
 
   services.openssh.enable = true;
 
@@ -134,6 +136,4 @@
   system.autoUpgrade.allowReboot = true;
 
   system.stateVersion = "25.05";
-
 }
-

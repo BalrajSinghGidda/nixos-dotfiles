@@ -1,24 +1,20 @@
 {
-  config,
-  pkgs,
-  ...
-}: {
-  # Import Home Manager modules (apps, git, shell, etc.)
   imports = [
     ../../modules/home-manager
   ];
 
-  # User identity - CHANGE THESE for your system!
   home.username = "balraj";
   home.homeDirectory = "/home/balraj";
 
-  # Home Manager state version - DON'T change this after initial setup
+  # This value determines the Home Manager release that your configuration is
+  # compatible with. This helps avoid breakage when a new Home Manager release
+  # introduces backwards incompatible changes.
+  #
+  # You should not change this value, even if you update Home Manager. If you do
+  # want to update the value, then make sure to first check the Home Manager
+  # release notes.
   home.stateVersion = "25.05";
 
-  # Manage application dotfiles using XDG Base Directory specification
-  # These files are copied to the Nix store and symlinked to ~/.config/
-  xdg.configFile."qtile".source = ../../config/qtile;
-  xdg.configFile."rofi".source = ../../config/rofi;
-  xdg.configFile."picom".source = ../../config/picom;
-  xdg.configFile."kitty".source = ../../config/kitty;
+  # Let Home Manager install and manage itself.
+  programs.home-manager.enable = true;
 }

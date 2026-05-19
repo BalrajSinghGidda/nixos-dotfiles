@@ -1,102 +1,25 @@
 {pkgs, ...}: {
-  # Bootloader configuration
+  # Bootloader
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  # Network configuration
-  networking.hostName = "nixos-btw"; # Change this for your machine
-  networking.networkmanager.enable = true;
+  # Nix Settings
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
-  # Timezone and locale
-  time.timeZone = "Asia/Kolkata";
+  # Timezone and Locale
+  time.timeZone = "UTC"; # Replace with your timezone if needed
+  i18n.defaultLocale = "en_US.UTF-8";
 
-  # Allow unfree packages (needed for some proprietary software)
-  nixpkgs.config.allowUnfree = true;
-
-  # Bash configuration
-  programs.bash.completion.enable = true;
-  programs.bash.blesh.enable = true; # Bash Line Editor SHell
-
-  # Enable nix-ld for running unpatched binaries
-  # nix-ld provides a dynamic linker and common libraries for non-NixOS executables
-  # This is essential for running downloaded binaries, AppImages, and proprietary software
-  programs.nix-ld = {
-    enable = true;
-    # Add common libraries that non-NixOS binaries might need
-    # These libraries are symlinked to /run/current-system/sw/share/nix-ld/lib/
-    libraries = with pkgs; [
-      # C/C++ standard libraries
-      stdenv.cc.cc.lib
-      glibc
-
-      # Common system libraries
-      zlib
-      zstd
-      xz
-      bzip2
-      gzip
-
-      # SSL/TLS
-      openssl
-
-      # X11 and graphics
-      libX11
-      libxext
-      libXrender
-      libXtst
-      libXi
-      libglvnd
-      mesa
-
-      # Audio
-      alsa-lib
-      libpulseaudio
-
-      # Other common dependencies
-      libcap
-      attr
-      acl
-      fontconfig
-      freetype
-      dbus
-      systemd
-
-      # Development libraries
-      curl
-      expat
-      libxml2
-
-      # For running FHS binaries
-      glib
-      nspr
-      nss
-      util-linux
-    ];
-  };
-
-  # Dell-specific kernel modules for proper hardware support
-  boot.kernelModules = [
-    "dell-wmi" # WMI driver for Dell laptops
-    "dell-wmi-sysman" # System management
-    "dell-smbios" # SMBIOS interface
-    "dell-wmi-descriptor" # WMI descriptor
-    "video" # Video driver
-    "sparse-keymap" # Sparse keymap support
-  ];
-
-  # User account configuration - CHANGE 'balraj' to your username!
+  # User Configuration
   users.users.balraj = {
     isNormalUser = true;
-    extraGroups = ["wheel" "networking"]; # wheel = sudo access
-    packages = with pkgs; [
-      tree # Directory tree visualization
-    ];
+    description = "balraj";
+    extraGroups = [ "networkmanager" "wheel" "video" ];
+    shell = pkgs.nushell; # Set Nushell as default system shell
   };
 
-  # Enable Nix flakes and new nix command
-  nix.settings.experimental-features = ["nix-command" "flakes"];
+  environment.shells = with pkgs; [ nushell ];
 
-  # NixOS state version - DON'T change after initial installation
-  # This is the version you initially installed, not the channel you're using
-  system.stateVersion = "25.11";
+  # Networking
+  networking.networkmanager.enable = true;
 }

@@ -1,11 +1,10 @@
-{ pkgs, ... }:
-
-{
-  # GUI applications (managed by Home Manager)
+{pkgs, ...}: {
   home.packages = with pkgs; [
-    # Package management
-    flatpak # Universal package manager
-    pcmanfm
-    google-chrome
+    firefox
+    pavucontrol
+    brightnessctl
+    grim
+    slurp
+    wl-clipboard
   ];
 }

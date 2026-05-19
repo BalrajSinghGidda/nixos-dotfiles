@@ -5,6 +5,12 @@
     kitty
     wget
     curl
+    github-copilot-cli
+    yazi
+    gemini-cli
+    lazygit
+    gh
+    vscodium
   ];
 
   fonts.packages = with pkgs; [

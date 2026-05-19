@@ -9,6 +9,13 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nvf = {
+      url = "github:NotAShelf/nvf";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    nix-alien.url = "github:thiagokokada/nix-alien";
+
     # DankMaterialShell: Comprehensive desktop shell and greeter
     dms = {
       url = "github:AvengeMedia/DankMaterialShell";
@@ -16,13 +23,24 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, dms, ... }@inputs: {
+  outputs = { self, nixpkgs, nvf, home-manager, dms, nix-alien, ... }@inputs: {
     nixosConfigurations.nixos-btw = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       specialArgs = { inherit inputs; };
       modules = [
         ./hosts/nixos-btw/default.nix
         dms.nixosModules.greeter # Enable DMS login system
+
+        nvf.nixosModules.default
+
+        # Add nix-alien to system packages
+        # Enables running unpatched binaries with automatic library detection
+        ({ pkgs, ... }: {
+          environment.systemPackages = [
+            nix-alien.packages.x86_64-linux.nix-alien
+          ];
+        })
+
 
         home-manager.nixosModules.home-manager
         {

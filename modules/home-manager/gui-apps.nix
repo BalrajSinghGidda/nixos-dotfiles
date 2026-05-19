@@ -6,5 +6,11 @@
     grim
     slurp
     wl-clipboard
+    tmux
+    zellij
+    ripgrep
+    fd
+    nil
+    nixpkgs-fmt
   ];
 }

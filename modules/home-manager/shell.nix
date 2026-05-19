@@ -5,7 +5,7 @@
     shellAliases = {
       # NixOS management
       nrs = "sudo nixos-rebuild switch --flake ~/nixos-dotfiles/#nixos-btw";
-      sysclean = "sudo nix-collect-garbage -d"
+      sysclean = "sudo nix-collect-garbage -d";
       nc = "nvim ~/nixos-dotfiles/";
 
       # Config editing shortcuts

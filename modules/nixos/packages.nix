@@ -4,6 +4,7 @@
     matugen
     kitty
     wget
+    nitch
     curl
     github-copilot-cli
     yazi
@@ -11,10 +12,14 @@
     lazygit
     gh
     vscodium
+    blueman
+    bluez
   ];
 
   fonts.packages = with pkgs; [
     nerd-fonts.fira-code
     nerd-fonts.jetbrains-mono
+    corefonts
+    vista-fonts
   ];
 }

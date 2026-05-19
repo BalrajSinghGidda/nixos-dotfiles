@@ -6,7 +6,8 @@
   # Enable DankMaterialShell
   programs.dank-material-shell = {
     enable = true;
-    # DMS specific configurations
+    # Disable wallpaper handling to avoid pre-start script issues
+    greeter.wallpaperPath = null;
   };
 
   # Out-of-store symlink for Hyprland config

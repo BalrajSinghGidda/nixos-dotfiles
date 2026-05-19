@@ -1,4 +1,8 @@
-{lib, ...}: {
+{
+  pkgs,
+  lib,
+  ...
+}: {
   # Enable Hyprland
   programs.hyprland.enable = true;
 
@@ -21,11 +25,17 @@
   # Tailscale VPN service
   services.tailscale.enable = true;
 
+  # Touchpad/trackpad support for laptops
+  services.libinput.enable = true;
+
+  services.udisks2.enable = true;
+  services.gvfs.enable = true;
+
   # Bluetooth MPRIS media control proxy
   systemd.user.services.mpris-proxy = {
     description = "Mpris proxy";
-    after = [ "network.target" "sound.target" ];
-    wantedBy = [ "default.target" ];
+    after = ["network.target" "sound.target"];
+    wantedBy = ["default.target"];
     serviceConfig.ExecStart = "${pkgs.bluez}/bin/mpris-proxy";
   };
 
@@ -71,7 +81,8 @@
   # Enable XDG Portal
   xdg.portal = {
     enable = true;
-    config.common.default = [ "*" ];
+    extraPortals = [pkgs.xdg-desktop-portal-hyprland];
+    config.common.default = ["hyprland" "gtk" "*"];
     wlr.enable = true;
   };
 }

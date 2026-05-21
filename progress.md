@@ -97,3 +97,43 @@
 - **Did:** Ran `nix flake check` after enabling the Apple sound module; it passed.
 - **Next:** Rebuild the `mac-btw` system so the new kernel module is built and installed.
 - **How:** Run `sudo nixos-rebuild switch --flake .#mac-btw` on the MacBook, then reboot if the module doesn’t load automatically.
+
+- **Did:** Set `boot.kernelPackages = pkgs.linuxPackages_latest;` in `modules/nixos/core.nix` so both hosts track the latest kernel.
+- **Next:** Re-run `nix flake check` and rebuild on target machines.
+- **How:** Run `nix flake check`, then `sudo nixos-rebuild switch --flake .#nixos-btw` / `.#mac-btw`.
+
+- **Did:** Ran `nix flake check` after pinning to `linuxPackages_latest`; it passed.
+- **Next:** Rebuild each host to pick up the latest kernel.
+- **How:** Run `sudo nixos-rebuild switch --flake .#nixos-btw` and `sudo nixos-rebuild switch --flake .#mac-btw` on their respective machines.
+
+- **Did:** Disabled `hardware.facetimehd.enable` for `mac-btw` to avoid the FacetimeHD driver build failure on the latest kernel.
+- **Next:** Re-run `nix flake check` and rebuild `mac-btw`.
+- **How:** Run `nix flake check`, then `sudo nixos-rebuild switch --flake .#mac-btw`.
+
+- **Did:** Ran `nix flake check` after disabling FacetimeHD; it passed.
+- **Next:** Rebuild `mac-btw` to apply the change.
+- **How:** Run `sudo nixos-rebuild switch --flake .#mac-btw` on the MacBook.
+
+- **Did:** Added a `disable-nvme-d3cold` systemd service for `mac-btw` using the nixos-hardware script to improve suspend/resume stability.
+- **Next:** Re-run `nix flake check` and rebuild `mac-btw`.
+- **How:** Run `nix flake check`, then `sudo nixos-rebuild switch --flake .#mac-btw`.
+
+- **Did:** Ran `nix flake check` after adding the NVMe resume workaround; it passed.
+- **Next:** Rebuild `mac-btw` and test suspend/resume.
+- **How:** Run `sudo nixos-rebuild switch --flake .#mac-btw`, then close/open the lid to verify wake stability.
+
+- **Did:** Reviewed the provided `journalctl -b -1` output; it only shows boot logs and no suspend/resume events.
+- **Next:** Collect suspend/resume logs from the current boot after reproducing the slow wake.
+- **How:** Run `journalctl -b | rg -i "suspend|resume|pm:|freeze|thaw|lid|wakeup|nvme|applesmc|applespi|brcm|wlan|i915"` right after a slow wake and share the output.
+
+- **Did:** Parsed the current-boot log blob; it still only contains boot messages and no suspend/resume markers.
+- **Next:** Capture suspend/resume markers with monotonic timestamps right after a slow wake.
+- **How:** Run `journalctl -b -o short-monotonic | rg -i "suspend|resume|pm:|freeze|thaw|lid|wakeup|i915|nvme|applesmc|applespi" | tail -n 200`.
+
+- **Did:** The follow-up log still appears to be boot-only and lacks any suspend/resume markers.
+- **Next:** Collect the last 200 journal lines immediately after a slow wake (before any reboot).
+- **How:** Run `sudo journalctl -b -r | head -n 200` right after the slow wake and share the output.
+
+- **Did:** User reports the slow wake issue is gone.
+- **Next:** None.
+- **How:** If it returns, capture `sudo journalctl -b -r | head -n 200` immediately after the slow wake.

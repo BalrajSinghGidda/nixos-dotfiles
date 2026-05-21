@@ -8,7 +8,6 @@
   configs = {
     kitty = "kitty";
     hypr = "hypr";
-    nushell = "nushell";
     qt5ct = "qt5ct";
     qt6ct = "qt6ct";
   };

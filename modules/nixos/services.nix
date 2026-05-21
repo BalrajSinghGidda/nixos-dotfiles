@@ -19,8 +19,6 @@
 
   nixpkgs.config.allowUnfree = true;
 
-  services.power-profiles-daemon.enable = true;
-
   # Flatpak support for additional app installation
   services.flatpak.enable = true;
 

@@ -28,6 +28,7 @@ in {
     alsa-utils
     vscodium
     blueman
+    upower
     bluez
   ];
 

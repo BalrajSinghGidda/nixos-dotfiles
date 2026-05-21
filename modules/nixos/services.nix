@@ -28,6 +28,10 @@
   # Touchpad/trackpad support for laptops
   services.libinput.enable = true;
 
+  # Power management and battery status
+  services.upower.enable = true;
+  services.power-profiles-daemon.enable = true;
+
   services.udisks2.enable = true;
   services.gvfs.enable = true;
 

@@ -85,3 +85,15 @@
 - **Did:** Ran `nix flake check` after adding the Lua config; it passed.
 - **Next:** Switch Hyprland to Lua config on the target machine and reload.
 - **How:** Rebuild (`nixos-rebuild` or `home-manager switch`) and restart Hyprland.
+
+- **Did:** Reviewed the `snd_hda_macbookpro` driver module in `modules/nixos/apple-sound.nix` and the nixpkgs PR enabling `CONFIG_SND_HDA_CODEC_CS8409`.
+- **Next:** Enable the Apple sound module only for `mac-btw`.
+- **How:** Add `../../modules/nixos/apple-sound.nix` to `hosts/mac-btw/default.nix` imports.
+
+- **Did:** Enabled the Apple sound module only for `mac-btw` by importing `modules/nixos/apple-sound.nix` in `hosts/mac-btw/default.nix`.
+- **Next:** Re-run `nix flake check` to validate the configuration.
+- **How:** Execute `nix flake check` in the repo root (no sudo).
+
+- **Did:** Ran `nix flake check` after enabling the Apple sound module; it passed.
+- **Next:** Rebuild the `mac-btw` system so the new kernel module is built and installed.
+- **How:** Run `sudo nixos-rebuild switch --flake .#mac-btw` on the MacBook, then reboot if the module doesn’t load automatically.

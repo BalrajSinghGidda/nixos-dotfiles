@@ -2,6 +2,7 @@
   imports = [
     ./hardware-configuration.nix
     ../../modules/nixos
+    ../../modules/nixos/apple-sound.nix
   ];
 
   networking.hostName = "mac-btw";

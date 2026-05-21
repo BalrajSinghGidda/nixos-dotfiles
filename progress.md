@@ -57,3 +57,19 @@
 - **Did:** Reviewed git status and diff to confirm `flake.nix`/`flake.lock` and `progress.md` changes.
 - **Next:** Provide the non-sudo commands to rebuild/switch for each host.
 - **How:** Use `nixos-rebuild` with `--flake .#<host>` under sudo (user-run) or `nix build`/`nix flake check` for validation.
+
+- **Did:** Searched the repo for `dsearch/danksearch` and deprecated `xorg.lib*` references.
+- **Next:** Update nix-ld xorg library names and address the `dsearch` fixed-output hash mismatch.
+- **How:** Edit `modules/nixos/nix-ld.nix` to use `libx*` packages, and decide whether to update or override the `danksearch` input.
+
+- **Did:** Replaced deprecated `xorg.lib*` references with `libx*` packages in `modules/nixos/nix-ld.nix`.
+- **Next:** Override the `dsearch` package vendor hash via the Home Manager module.
+- **How:** Set `programs.dsearch.package` to an overridden `inputs.danksearch` package with the new `vendorHash`.
+
+- **Did:** Overrode `programs.dsearch.package` to use the corrected `vendorHash` for `dsearch`.
+- **Next:** Re-run `nix flake check` or `nixos-rebuild` to verify the build succeeds.
+- **How:** Run `nix flake check` in this repo (no sudo), then `sudo nixos-rebuild switch --flake .#mac-btw` on the Mac.
+
+- **Did:** Ran `nix flake check` after the fixes; it passed.
+- **Next:** Re-run `sudo nixos-rebuild switch --flake .#mac-btw` on the MacBook.
+- **How:** From the repo root on the Mac, execute `sudo nixos-rebuild switch --flake .#mac-btw`.

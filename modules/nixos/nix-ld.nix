@@ -25,13 +25,13 @@
       libxkbcommon
 
       # XWayland compatibility (many apps still need these)
-      xorg.libX11
-      xorg.libXcursor
-      xorg.libXi
-      xorg.libXext
-      xorg.libXrandr
-      xorg.libXrender
-      xorg.libxcb
+      libx11
+      libxcursor
+      libxi
+      libxext
+      libxrandr
+      libxrender
+      libxcb
 
       # OpenGL / Vulkan
       libglvnd

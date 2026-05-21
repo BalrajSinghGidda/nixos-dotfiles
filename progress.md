@@ -73,3 +73,15 @@
 - **Did:** Ran `nix flake check` after the fixes; it passed.
 - **Next:** Re-run `sudo nixos-rebuild switch --flake .#mac-btw` on the MacBook.
 - **How:** From the repo root on the Mac, execute `sudo nixos-rebuild switch --flake .#mac-btw`.
+
+- **Did:** Read `config/hypr/hyprland.conf` and the DMS Lua fragments under `config/hypr/dms/`.
+- **Next:** Create `hyprland.lua` that mirrors the current config and requires the DMS modules.
+- **How:** Translate the conf blocks into `hl.monitor`, `hl.config`, `hl.curve`, `hl.animation`, and `hl.bind` calls, then add `require("dms.*")`.
+
+- **Did:** Added `config/hypr/hyprland.lua` with a Lua port of the existing Hyprland config and required the DMS modules.
+- **Next:** Decide whether to keep `hyprland.conf` as legacy or switch consumers to `hyprland.lua`.
+- **How:** If using Hyprland Lua config, ensure Hyprland loads `hyprland.lua`; otherwise keep `hyprland.conf` for compatibility.
+
+- **Did:** Ran `nix flake check` after adding the Lua config; it passed.
+- **Next:** Switch Hyprland to Lua config on the target machine and reload.
+- **How:** Rebuild (`nixos-rebuild` or `home-manager switch`) and restart Hyprland.

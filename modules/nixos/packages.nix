@@ -30,6 +30,7 @@ in {
     cups-pk-helper
     vscodium
     blueman
+    kdePackages.qt6ct
     upower
     bluez
   ];

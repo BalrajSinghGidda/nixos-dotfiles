@@ -26,6 +26,8 @@ in {
     dunst
     pamixer
     alsa-utils
+    accountsservice
+    cups-pk-helper
     vscodium
     blueman
     upower

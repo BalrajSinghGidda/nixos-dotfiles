@@ -20,6 +20,7 @@
     };
 
     nix-alien.url = "github:thiagokokada/nix-alien";
+    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
     # DankMaterialShell: Comprehensive desktop shell and greeter
     dms = {
@@ -35,6 +36,7 @@
     home-manager,
     dms,
     nix-alien,
+    nixos-hardware,
     danksearch,
     ...
   } @ inputs: {
@@ -43,6 +45,7 @@
       specialArgs = {inherit inputs;};
       modules = [
         ./hosts/nixos-btw/default.nix
+        nixos-hardware.nixosModules.dell-latitude-7490
         dms.nixosModules.greeter # Enable DMS login system
 
         nvf.nixosModules.default
@@ -72,6 +75,7 @@
       specialArgs = {inherit inputs;};
       modules = [
         ./hosts/mac-btw/default.nix
+        nixos-hardware.nixosModules.apple-macbook-pro-14-1
         dms.nixosModules.greeter # Enable DMS login system
 
         nvf.nixosModules.default

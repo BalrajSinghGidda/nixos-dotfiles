@@ -13,4 +13,5 @@
     nil
     nixpkgs-fmt
   ];
+  programs.dsearch.enable = true;
 }

@@ -8,6 +8,7 @@
       rebuild-nix = "nh os switch ~/nixos-dotfiles/#nixos-btw";
       rebuild-mac = "nh os switch ~/nixos-dotfiles/#mac-btw";
       sysclean = "sudo nh clean all";
+      install-antigravity-cli = "curl -fsSL https://antigravity.google/cli/install.sh | bash";
       sysclean-verbose = "sudo nh clean all -v";
       nc = "nvim ~/nixos-dotfiles/";
 
@@ -25,6 +26,9 @@
       $env.config = {
         show_banner: false,
       }
+    '';
+    extraEnv = ''
+      $env.PATH = ($env.PATH | split row (char esep) | append "/home/balraj/.local/bin")
     '';
   };
 

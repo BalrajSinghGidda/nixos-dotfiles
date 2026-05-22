@@ -1,5 +1,44 @@
-{ inputs, pkgs, ... }:
 {
+  inputs,
+  pkgs,
+  config,
+  ...
+}: let
+  user = "balraj";
+  uid = config.users.users.${user}.uid;
+  lidAction = pkgs.writeShellScript "lid-action" ''
+    set -euo pipefail
+
+    run_hyprctl() {
+      local action="$1"
+      local runtime="/run/user/${toString uid}"
+      local sig=""
+
+      if [ -d "$runtime/hypr" ]; then
+        sig="$(ls -1 "$runtime/hypr" 2>/dev/null | head -n1 || true)"
+      fi
+
+      if [ -z "$sig" ] && [ -d /tmp/hypr ]; then
+        sig="$(ls -1 /tmp/hypr 2>/dev/null | head -n1 || true)"
+      fi
+
+      if [ -n "$sig" ]; then
+        ${pkgs.util-linux}/bin/runuser -u ${user} -- env \
+          XDG_RUNTIME_DIR="$runtime" \
+          HYPRLAND_INSTANCE_SIGNATURE="$sig" \
+          ${pkgs.hyprland}/bin/hyprctl dispatch dpms "$action"
+      fi
+    }
+
+    state="$(awk '{print $2}' /proc/acpi/button/lid/LID0/state 2>/dev/null || true)"
+    if [ "$state" = "closed" ]; then
+      ${pkgs.systemd}/bin/loginctl lock-session
+      run_hyprctl off
+    elif [ "$state" = "open" ]; then
+      run_hyprctl on
+    fi
+  '';
+in {
   imports = [
     ./hardware-configuration.nix
     ../../modules/nixos
@@ -21,6 +60,27 @@
       TimeoutSec = 0;
     };
     wantedBy = ["multi-user.target" "suspend.target"];
+  };
+
+  services.logind.settings.Login = {
+    HandleSuspendKey = "ignore";
+    HandleHibernateKey = "ignore";
+    HandleLidSwitch = "lock";
+    HandleLidSwitchExternalPower = "lock";
+    HandleLidSwitchDocked = "ignore";
+  };
+
+  systemd.sleep.settings.Sleep = {
+    AllowSuspend = "no";
+    AllowHibernation = "no";
+    AllowSuspendThenHibernate = "no";
+    AllowHybridSleep = "no";
+  };
+
+  services.acpid.enable = true;
+  services.acpid.handlers.lid = {
+    event = "button/lid.*";
+    action = "${lidAction}";
   };
 
   # FacetimeHD driver fails to build on latest kernels; disable to keep linuxPackages_latest.

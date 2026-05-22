@@ -4,8 +4,11 @@
     # Custom shell aliases
     shellAliases = {
       # NixOS management
-      nrs = "sudo nixos-rebuild switch --flake ~/nixos-dotfiles/#nixos-btw";
-      sysclean = "sudo nix-collect-garbage -d";
+      nixos-rebuild = "nh os";
+      rebuild-nix = "nh os switch ~/nixos-dotfiles/#nixos-btw";
+      rebuild-mac = "nh os switch ~/nixos-dotfiles/#mac-btw";
+      sysclean = "sudo nh clean all";
+      sysclean-verbose = "sudo nh clean all -v";
       nc = "nvim ~/nixos-dotfiles/";
 
       # Config editing shortcuts

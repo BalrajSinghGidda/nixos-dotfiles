@@ -32,6 +32,19 @@
   services.upower.enable = true;
   services.power-profiles-daemon.enable = true;
 
+  networking.firewall.allowedTCPPortRanges = [
+    {
+      from = 1714;
+      to = 1764;
+    }
+  ];
+  networking.firewall.allowedUDPPortRanges = [
+    {
+      from = 1714;
+      to = 1764;
+    }
+  ];
+
   services.udisks2.enable = true;
   services.gvfs.enable = true;
 

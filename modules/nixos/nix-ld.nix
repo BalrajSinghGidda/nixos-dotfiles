@@ -1,7 +1,5 @@
 # nix-ld.nix
-{ pkgs, ... }:
-
-{
+{pkgs, ...}: {
   programs.nix-ld = {
     enable = true;
 
@@ -10,6 +8,7 @@
       # C/C++ runtime
       stdenv.cc.cc.lib
       glibc
+      gtk3
 
       # Compression / archive libs
       zlib

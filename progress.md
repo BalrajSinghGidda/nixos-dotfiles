@@ -137,3 +137,35 @@
 - **Did:** User reports the slow wake issue is gone.
 - **Next:** None.
 - **How:** If it returns, capture `sudo journalctl -b -r | head -n 200` immediately after the slow wake.
+
+- **Did:** Added a udev rule for `mac-btw` to disable runtime power management on xHCI (USB 3) controllers to prevent resume timeouts.
+- **Next:** Rebuild `mac-btw` and verify resume latency.
+- **How:** Run `sudo nixos-rebuild switch --flake .#mac-btw` and test lid close/open.
+
+- **Did:** Ran `nix flake check` after the xHCI rule update; it passed.
+- **Next:** Rebuild `mac-btw` and test lid close/open.
+- **How:** Run `sudo nixos-rebuild switch --flake .#mac-btw`.
+
+- **Did:** Removed the xHCI resume workarounds and disabled sleep for `mac-btw`, while locking on lid close.
+- **Next:** Re-run `nix flake check` and rebuild `mac-btw`.
+- **How:** Run `nix flake check`, then `sudo nixos-rebuild switch --flake .#mac-btw`.
+
+- **Did:** Updated sleep/logind options to the new `settings` schema (replacing deprecated `extraConfig`).
+- **Next:** Re-run `nix flake check` and rebuild `mac-btw`.
+- **How:** Run `nix flake check`, then `sudo nixos-rebuild switch --flake .#mac-btw`.
+
+- **Did:** Moved lid-switch settings fully to `services.logind.settings.Login` to avoid rename warnings.
+- **Next:** Re-run `nix flake check` and rebuild `mac-btw`.
+- **How:** Run `nix flake check`, then `sudo nixos-rebuild switch --flake .#mac-btw`.
+
+- **Did:** Ran `nix flake check` after the lid/sleep changes; it passed.
+- **Next:** Rebuild `mac-btw` to apply the new lid and sleep behavior.
+- **How:** Run `sudo nixos-rebuild switch --flake .#mac-btw`.
+
+- **Did:** Added an acpid lid handler to lock the session and turn DPMS off/on via Hyprland when the lid closes/opens.
+- **Next:** Re-run `nix flake check` and rebuild `mac-btw`.
+- **How:** Run `nix flake check`, then `sudo nixos-rebuild switch --flake .#mac-btw`.
+
+- **Did:** Ran `nix flake check` after adding the lid DPMS handler; it passed.
+- **Next:** Rebuild `mac-btw` and test lid close/open behavior.
+- **How:** Run `sudo nixos-rebuild switch --flake .#mac-btw`, then close/open the lid to verify lock + screen off/on.

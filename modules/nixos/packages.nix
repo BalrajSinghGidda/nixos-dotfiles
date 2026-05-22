@@ -18,6 +18,9 @@ in {
     unzip
     p7zip
     gh
+    nh
+    nix-output-monitor
+    nvd
     xdg-desktop-portal-hyprland
     hyprland-qt-support
     hyprland-qtutils
@@ -34,6 +37,10 @@ in {
     upower
     bluez
   ];
+
+  programs.kdeconnect = {
+    enable = true;
+  };
 
   fonts = {
     fontDir.enable = true;

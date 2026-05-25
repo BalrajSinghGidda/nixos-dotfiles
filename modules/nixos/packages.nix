@@ -7,13 +7,15 @@ in {
     kitty
     wget
     nitch
+    kdePackages.dolphin
     curl
+    power-profiles-daemon
     nitch
     github-copilot-cli
+    cups-pk-helper
     yazi
     gemini-cli
     lazygit
-    pcmanfm
     appimage-run
     unzip
     p7zip

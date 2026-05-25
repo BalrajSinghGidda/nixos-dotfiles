@@ -22,6 +22,15 @@ in {
     enableSystemMonitoring = true;
   };
 
+  systemd.user.targets.hyprland-session = {
+    Unit = {
+      Description = "Hyprland compositor session";
+      BindsTo = [ "graphical-session.target" ];
+      After = [ "graphical-session-pre.target" ];
+      Before = [ "graphical-session.target" ];
+    };
+  };
+
   # Out-of-store symlink for configs
   xdg.configFile =
     builtins.mapAttrs

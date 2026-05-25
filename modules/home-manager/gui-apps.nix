@@ -12,6 +12,7 @@
     grim
     slurp
     wl-clipboard
+    caligula
     tmux
     zellij
     ripgrep

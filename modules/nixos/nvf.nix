@@ -1,17 +1,15 @@
-{ pkgs, ... }:
-
-{
+{pkgs, ...}: {
   # Neovim configuration using nvf (Neovim configuration framework)
   # nvf provides a declarative way to configure Neovim within NixOS
   # This replaces the previous manual Lua-based configuration
-  
+
   programs.nvf = {
     enable = true;
     settings = {
       vim = {
         # Command aliases for backwards compatibility
-        viAlias = true;   # Map 'vi' command to nvim
-        vimAlias = false; # Keep 'vim' separate
+        viAlias = true;
+        vimAlias = true;
 
         syntaxHighlighting = true;
 
@@ -36,37 +34,61 @@
         debugger.nvim-dap.enable = true;
 
         ui = {
-          colorizer.enable = true;   # Highlight color codes
-          illuminate.enable = true;  # Highlight word under cursor
+          colorizer.enable = true; # Highlight color codes
+          illuminate.enable = true; # Highlight word under cursor
         };
 
         utility = {
-          mkdir.enable = true;       # Auto-create directories on save
-          yazi-nvim.enable = true;   # Terminal file manager integration
+          mkdir.enable = true; # Auto-create directories on save
+          yazi-nvim.enable = true; # Terminal file manager integration
         };
 
-        # Tokyo Night color theme
-        theme = {
-          enable = true;
-          name = "tokyonight";
-          style = "night";
+        # Base46 colorscheme (NvChad theme pack)
+        extraPlugins.base46 = {
+          package = pkgs.vimUtils.buildVimPlugin {
+            pname = "base46";
+            version = "v3.0";
+            src = pkgs.fetchFromGitHub {
+              owner = "AvengeMedia";
+              repo = "base46";
+              rev = "eb54ce645266cac86bb6a4241428fefe61e90a8a";
+              hash = "sha256-dbVuQwFCOIBK9y7fklulxHHt57KbS/8KaiTvfe5rmco=";
+            };
+            doCheck = false;
+          };
+          setup = ''
+            local base46 = require("base46")
+            base46.setup({
+              set_background = true,
+              term_colors = true,
+              transparency = false,
+              nvchad = {
+                cmp_style = "default",
+                telescope_style = "borderless",
+                statusline_theme = "default",
+                cheatsheet_theme = nil,
+              },
+            })
+            vim.opt.runtimepath:append(vim.fn.expand("~/.config/nvim"))
+            vim.cmd.colorscheme("dms")
+          '';
         };
 
         # Editor options
         options = {
-          shiftwidth = 4;  # Indent with 4 spaces
-          tabstop = 4;     # Tab displays as 4 spaces
+          shiftwidth = 4; # Indent with 4 spaces
+          tabstop = 4; # Tab displays as 4 spaces
         };
 
         # Language support configuration
         languages = {
           enableTreesitter = true; # Syntax highlighting and parsing
-          enableFormat = true;     # Auto-formatting support
-          enableDAP = true;        # Debug support for languages
+          enableFormat = true; # Auto-formatting support
+          enableDAP = true; # Debug support for languages
 
           # Enable language servers and tools
           python.enable = true;
-          clang.enable = true;  # C/C++
+          clang.enable = true; # C/C++
           bash.enable = true;
           css.enable = true;
           go.enable = true;
@@ -104,9 +126,9 @@
         # Language Server Protocol configuration
         lsp = {
           enable = true;
-          formatOnSave = true;           # Auto-format on save
-          lspconfig.enable = true;        # LSP configurations
-          nvim-docs-view.enable = true;   # Documentation viewer
+          formatOnSave = true; # Auto-format on save
+          lspconfig.enable = true; # LSP configurations
+          nvim-docs-view.enable = true; # Documentation viewer
         };
 
         # Status line at the bottom

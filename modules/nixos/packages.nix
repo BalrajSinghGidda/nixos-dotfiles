@@ -1,6 +1,7 @@
-{pkgs, ...}: let
-  apple-fonts = pkgs.callPackage ./apple-fonts.nix {};
-in {
+{pkgs, ...}: # let
+#  apple-fonts = pkgs.callPackage ./apple-fonts.nix {};
+#in
+{
   environment.systemPackages = with pkgs; [
     git
     matugen
@@ -51,7 +52,7 @@ in {
       nerd-fonts.jetbrains-mono
       corefonts
       vista-fonts
-      apple-fonts
+#      apple-fonts
       noto-fonts
       noto-fonts-cjk-sans
       noto-fonts-color-emoji

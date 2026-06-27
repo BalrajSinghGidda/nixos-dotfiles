@@ -84,7 +84,7 @@ in {
   };
 
   # FacetimeHD driver fails to build on latest kernels; disable to keep linuxPackages_latest.
-  hardware.facetimehd.enable = false;
+  hardware.facetimehd.enable = true;
 
   system.stateVersion = "25.11"; # Did you see the session context date? 2026.
 }

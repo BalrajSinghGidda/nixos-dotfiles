@@ -1,7 +1,7 @@
 {inputs, ...}: {
   imports = [
     ./shell.nix
-    ./hyprland.nix
+    ./niri.nix
     ./devtools.nix
     ./gui-apps.nix
     inputs.danksearch.homeModules.dsearch

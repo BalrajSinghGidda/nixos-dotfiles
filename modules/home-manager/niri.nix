@@ -7,7 +7,7 @@
   create_symlink = path: config.lib.file.mkOutOfStoreSymlink path;
   configs = {
     kitty = "kitty";
-    hypr = "hypr";
+    niri = "niri";
     qt5ct = "qt5ct";
     qt6ct = "qt6ct";
   };
@@ -22,9 +22,9 @@ in {
     enableSystemMonitoring = true;
   };
 
-  systemd.user.targets.hyprland-session = {
+  systemd.user.targets.niri-session = {
     Unit = {
-      Description = "Hyprland compositor session";
+      Description = "Niri compositor session";
       BindsTo = [ "graphical-session.target" ];
       After = [ "graphical-session-pre.target" ];
       Before = [ "graphical-session.target" ];
@@ -41,5 +41,5 @@ in {
     configs;
 
   # old way:
-  #  xdg.configFile."hypr/hyprland.conf".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nixos-dotfiles/config/hypr/hyprland.conf";
+  #  xdg.configFile."niri/config.kdl".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nixos-dotfiles/config/niri/config.kdl";
 }

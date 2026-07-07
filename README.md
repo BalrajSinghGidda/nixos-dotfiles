@@ -5,7 +5,7 @@ A completely modular, scratch-built NixOS configuration focused on speed, aesthe
 ## 🛠️ Tech Stack
 
 - **OS**: [NixOS](https://nixos.org/) (Unstable)
-- **WM**: [Hyprland](https://hyprland.org/) (Wayland)
+- **WM**: [Niri](https://github.com/YaLTeR/niri) (Wayland)
 - **Shell**: [Nushell](https://www.nushell.sh/) (Replacing Bash)
 - **UI Shell & Greeter**: [DankMaterialShell (DMS)](https://github.com/AvengeMedia/DankMaterialShell)
 - **Theming**: [Matugen](https://github.com/InSync-Theming/matugen) (Material You generation)
@@ -24,16 +24,16 @@ nixos-dotfiles/
 │       └── home.nix       # Home Manager entry point
 ├── modules/               # Reusable logic
 │   ├── nixos/            # System-level modules (Core, Services, Pkgs)
-│   └── home-manager/     # User-level modules (Shell, Hyprland, Apps)
+│   └── home-manager/     # User-level modules (Shell, Niri, Apps)
 └── config/                # Raw config files (Out-of-store symlinks)
 ```
 
 ## ⚡ Live Reloading (Out-of-Store Symlinks)
 
-This repository uses a special symlinking strategy for rapid iteration. Configuration files in `~/.config/` (like `hypr/hyprland.conf`) are **out-of-store symlinks** pointing directly back to this repository.
+This repository uses a special symlinking strategy for rapid iteration. Configuration files in `~/.config/` (like `niri/config.kdl`) are **out-of-store symlinks** pointing directly back to this repository.
 
 **Benefits:**
-- Change a keybind in `config/hypr/hyprland.conf` and it applies **instantly** without a `nixos-rebuild`.
+- Change a keybind in `config/niri/config.kdl` and it applies **instantly** without a `nixos-rebuild`.
 - Matugen can write to these files freely without being blocked by the read-only Nix store.
 
 ## 🚀 Getting Started

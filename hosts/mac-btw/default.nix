@@ -9,33 +9,33 @@
   lidAction = pkgs.writeShellScript "lid-action" ''
     set -euo pipefail
 
-    run_hyprctl() {
+    run_niri_action() {
       local action="$1"
       local runtime="/run/user/${toString uid}"
-      local sig=""
+      local socket=""
 
-      if [ -d "$runtime/hypr" ]; then
-        sig="$(ls -1 "$runtime/hypr" 2>/dev/null | head -n1 || true)"
+      if [ -d "$runtime" ]; then
+        socket="$(ls -1 "$runtime"/niri*.sock 2>/dev/null | head -n1 || true)"
       fi
 
-      if [ -z "$sig" ] && [ -d /tmp/hypr ]; then
-        sig="$(ls -1 /tmp/hypr 2>/dev/null | head -n1 || true)"
+      if [ -z "$socket" ]; then
+        socket="$(ls -1 /tmp/niri*.sock 2>/dev/null | head -n1 || true)"
       fi
 
-      if [ -n "$sig" ]; then
+      if [ -n "$socket" ]; then
         ${pkgs.util-linux}/bin/runuser -u ${user} -- env \
           XDG_RUNTIME_DIR="$runtime" \
-          HYPRLAND_INSTANCE_SIGNATURE="$sig" \
-          ${pkgs.hyprland}/bin/hyprctl dispatch dpms "$action"
+          NIRI_SOCKET="$socket" \
+          ${pkgs.niri}/bin/niri msg action "$action"
       fi
     }
 
     state="$(awk '{print $2}' /proc/acpi/button/lid/LID0/state 2>/dev/null || true)"
     if [ "$state" = "closed" ]; then
       ${pkgs.systemd}/bin/loginctl lock-session
-      run_hyprctl off
+      run_niri_action power-off-monitors
     elif [ "$state" = "open" ]; then
-      run_hyprctl on
+      run_niri_action power-on-monitors
     fi
   '';
 in {

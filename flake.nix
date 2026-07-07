@@ -1,5 +1,5 @@
 {
-  description = "NixOS + Hyprland + DMS + Matugen + Nushell Configuration";
+  description = "NixOS + Niri + DMS + Matugen + Nushell Configuration";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";

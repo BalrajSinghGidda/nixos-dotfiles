@@ -15,7 +15,7 @@
       # Config editing shortcuts
       edit-nixos = "nvim ~/nixos-dotfiles/modules/nixos/";
       edit-home = "nvim ~/nixos-dotfiles/modules/home-manager/";
-      edit-hypr = "nvim ~/nixos-dotfiles/config/hypr/hyprland.conf";
+      edit-niri = "nvim ~/nixos-dotfiles/config/niri/config.kdl";
 
       # Enhanced file operations
       ls = "ls"; # Nushell has a built-in structured ls

@@ -24,9 +24,8 @@
     nh
     nix-output-monitor
     nvd
-    xdg-desktop-portal-hyprland
-    hyprland-qt-support
-    hyprland-qtutils
+    niri
+    xdg-desktop-portal-wlr
     capitaine-cursors-themed
     libnotify
     dunst

@@ -3,13 +3,13 @@
   lib,
   ...
 }: {
-  # Enable Hyprland
-  programs.hyprland.enable = true;
+  # Enable Niri
+  programs.niri.enable = true;
 
   # Enable DMS Greeter (Login System)
   programs.dank-material-shell.greeter = {
     enable = true;
-    compositor.name = "hyprland";
+    compositor.name = "niri";
     configHome = "/home/balraj";
   };
 
@@ -98,8 +98,8 @@
   # Enable XDG Portal
   xdg.portal = {
     enable = true;
-    extraPortals = [pkgs.xdg-desktop-portal-hyprland];
-    config.common.default = ["hyprland" "gtk" "*"];
+    extraPortals = [pkgs.xdg-desktop-portal-wlr];
+    config.common.default = ["wlr" "gtk" "*"];
     wlr.enable = true;
   };
 }

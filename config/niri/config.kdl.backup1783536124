@@ -1,8 +1,6 @@
 // Niri configuration for this dotfiles setup.
 
 input {
-    focus-follows-mouse
-    disable-power-key-handling
     keyboard {
         xkb {
             layout "us"
@@ -10,7 +8,6 @@ input {
     }
 
     touchpad {
-        natural-scroll
     }
 }
 
@@ -24,4 +21,3 @@ include "dms/cursor.kdl"
 include "dms/layout.kdl"
 include "dms/binds.kdl"
 include "dms/outputs.kdl"
-include "dms/windowrules.kdl"

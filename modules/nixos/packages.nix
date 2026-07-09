@@ -1,4 +1,5 @@
-{pkgs, ...}: # let
+{pkgs, ...}:
+# let
 #  apple-fonts = pkgs.callPackage ./apple-fonts.nix {};
 #in
 {
@@ -27,6 +28,8 @@
     niri
     xdg-desktop-portal-wlr
     capitaine-cursors-themed
+    tela-icon-theme
+    whitesur-icon-theme
     libnotify
     dunst
     pamixer
@@ -51,7 +54,7 @@
       nerd-fonts.jetbrains-mono
       corefonts
       vista-fonts
-#      apple-fonts
+      apple-fonts
       noto-fonts
       noto-fonts-cjk-sans
       noto-fonts-color-emoji

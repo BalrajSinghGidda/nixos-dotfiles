@@ -1,0 +1,46 @@
+
+binds {
+    Mod+Return { spawn "kitty"; }
+    Mod+Q { close-window; }
+    Mod+Shift+Q { quit; }
+    Mod+E { spawn "dolphin"; }
+    Mod+F { fullscreen-window; }
+    Mod+V { toggle-window-floating; }
+    Mod+Space { spawn "dms" "ipc" "call" "spotlight" "toggle"; }
+
+    Mod+Left { focus-column-left; }
+    Mod+Right { focus-column-right; }
+    Mod+Up { focus-window-up; }
+    Mod+Down { focus-window-down; }
+
+    Mod+1 { focus-workspace 1; }
+    Mod+2 { focus-workspace 2; }
+    Mod+3 { focus-workspace 3; }
+    Mod+4 { focus-workspace 4; }
+    Mod+5 { focus-workspace 5; }
+
+    Mod+Ctrl+1 { move-column-to-workspace 1; }
+    Mod+Ctrl+2 { move-column-to-workspace 2; }
+    Mod+Ctrl+3 { move-column-to-workspace 3; }
+    Mod+Ctrl+4 { move-column-to-workspace 4; }
+    Mod+Ctrl+5 { move-column-to-workspace 5; }
+
+    XF86AudioRaiseVolume allow-when-locked=true { spawn "pamixer" "-i" "5"; }
+    XF86AudioLowerVolume allow-when-locked=true { spawn "pamixer" "-d" "5"; }
+    XF86AudioMute allow-when-locked=true { spawn "pamixer" "-t"; }
+    XF86AudioMicMute allow-when-locked=true { spawn "pamixer" "--default-source" "-t"; }
+
+    XF86MonBrightnessUp allow-when-locked=true { spawn "brightnessctl" "set" "+10%"; }
+    XF86MonBrightnessDown allow-when-locked=true { spawn "brightnessctl" "set" "10%-"; }
+    XF86KbdBrightnessUp { spawn "brightnessctl" "-d" "spi::kbd_backlight" "set" "+10%"; }
+    XF86KbdBrightnessDown { spawn "brightnessctl" "-d" "spi::kbd_backlight" "set" "10%-"; }
+
+    Print {
+        spawn-sh "DIR=\"$HOME/Pictures/Screenshots\"; mkdir -p \"$DIR\"; FILE=\"$DIR/$(date +%Y-%m-%d_%H-%M-%S).png\"; grim \"$FILE\" && cat \"$FILE\" | wl-copy && notify-send \"Screenshot saved\" \"$FILE\""
+    }
+
+    Mod+S {
+        spawn-sh "DIR=\"$HOME/Pictures/Screenshots\"; mkdir -p \"$DIR\"; FILE=\"$DIR/$(date +%Y-%m-%d_%H-%M-%S).png\"; grim -g \"$(slurp)\" \"$FILE\" && cat \"$FILE\" | wl-copy && notify-send \"Screenshot saved\" \"$FILE\""
+    }
+}
+

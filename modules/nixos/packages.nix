@@ -1,8 +1,6 @@
-{pkgs, ...}:
-# let
-#  apple-fonts = pkgs.callPackage ./apple-fonts.nix {};
-#in
-{
+{pkgs, ...}: let
+  apple-fonts = pkgs.callPackage ./apple-fonts.nix {};
+in {
   environment.systemPackages = with pkgs; [
     git
     matugen

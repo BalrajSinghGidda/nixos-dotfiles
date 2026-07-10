@@ -39,6 +39,7 @@ in {
     kdePackages.qt6ct
     upower
     bluez
+    epiphany
   ];
 
   programs.kdeconnect = {

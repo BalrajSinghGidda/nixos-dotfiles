@@ -6,7 +6,6 @@
   services.kdeconnect.enable = true;
   services.kdeconnect.indicator = true;
   home.packages = with pkgs; [
-    firefox
     pavucontrol
     brightnessctl
     grim

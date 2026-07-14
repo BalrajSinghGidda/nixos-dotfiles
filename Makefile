@@ -15,15 +15,15 @@ help:
 
 # Apply configuration
 switch:
-	sudo nixos-rebuild switch --flake .#nixos-btw
+	nh os switch .#mac-btw
 
 # Test configuration without switching
 test:
-	sudo nixos-rebuild test --flake .#nixos-btw
+	nh os test .#mac-btw
 
 # Build configuration
 build:
-	sudo nixos-rebuild build --flake .#nixos-btw
+	nh os build .#mac-btw
 
 # Update flake dependencies
 update:
@@ -33,7 +33,7 @@ update:
 # Clean old generations (keeps last 3)
 clean:
 	@echo "Cleaning old system generations..."
-	sudo nix-collect-garbage --delete-older-than 7d
+	nh clean all --keep 3 --keep-since 7d
 	@echo "Done!"
 
 # Validate flake

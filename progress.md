@@ -169,3 +169,16 @@
 - **Did:** Ran `nix flake check` after adding the lid DPMS handler; it passed.
 - **Next:** Rebuild `mac-btw` and test lid close/open behavior.
 - **How:** Run `sudo nixos-rebuild switch --flake .#mac-btw`, then close/open the lid to verify lock + screen off/on.
+
+## 2026-07-14T19:46:19+05:30
+
+- **Did:**
+  - Removed all configurations related to the Dell Latitude 7490 host from `flake.nix`.
+  - Deleted the failed `youtube-music-cli` package folder.
+  - Organized, categorized, and cleaned up NixOS system packages in `modules/nixos/packages.nix` and Home Manager packages in `modules/home-manager/gui-apps.nix` (deduplicating `nitch` and `cups-pk-helper`).
+  - Updated the root `Makefile` to utilize the `nh` (Nix Helper) utility (`nh os switch`, `nh os test`, `nh os build`, and `nh clean`).
+  - Updated `README.md` to document the new `mac-btw` host structure, the `nh` tech stack addition, and updated build instructions.
+  - Reverted any changes made to the root-owned `hardware-configuration.nix` files to preserve original partition data.
+  - Verified the final flake evaluation via `nix flake check`.
+- **Next:** Apply the updated configuration.
+- **How:** Run `make switch` or `nh os switch .#nixos-btw` (or `.#mac-btw`) on target systems.

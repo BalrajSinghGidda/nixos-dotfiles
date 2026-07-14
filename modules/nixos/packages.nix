@@ -4,46 +4,57 @@ let
 in
 {
   environment.systemPackages = with pkgs; [
+    # --- Core Utilities ---
     git
-    matugen
-    kitty
     wget
-    nitch
-    kdePackages.dolphin
     curl
-    power-profiles-daemon
-    nitch
-    github-copilot-cli
-    cups-pk-helper
-    yazi
-    gemini-cli
-    lazygit
-    appimage-run
     unzip
     p7zip
-    gh
+    libnotify
+    nitch
+
+    # --- Nix & Development Tools ---
     nh
     nix-output-monitor
     nvd
+    gemini-cli
+    github-copilot-cli
+    gh
+
+    # --- Desktop Environment & Window Manager ---
     niri
     xdg-desktop-portal-wlr
-    capitaine-cursors-themed
-    tela-icon-theme
-    whitesur-icon-theme
-    libnotify
     dunst
     pamixer
     alsa-utils
-    accountsservice
-    cups-pk-helper
-    vscodium
-    blueman
-    kdePackages.qt6ct
-    upower
-    bluez
+
+    # --- TUI / Terminal Utilities ---
+    yazi
+    lazygit
+    appimage-run
+
+    # --- GUI Applications ---
     vivaldi
+    vscodium
     vlc
     libreoffice
+    kdePackages.dolphin
+    kitty
+
+    # --- Themes & Appearance ---
+    capitaine-cursors-themed
+    tela-icon-theme
+    whitesur-icon-theme
+    kdePackages.qt6ct
+    matugen
+
+    # --- Hardware, Power & Services ---
+    power-profiles-daemon
+    cups-pk-helper
+    upower
+    bluez
+    blueman
+    accountsservice
     ntfs3g
   ];
 

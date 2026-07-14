@@ -10,6 +10,7 @@ A completely modular, scratch-built NixOS configuration focused on speed, aesthe
 - **UI Shell & Greeter**: [DankMaterialShell (DMS)](https://github.com/AvengeMedia/DankMaterialShell)
 - **Theming**: [Matugen](https://github.com/InSync-Theming/matugen) (Material You generation)
 - **User Config**: [Home Manager](https://github.com/nix-community/home-manager)
+- **Helper**: [nh](https://github.com/viperML/nh) (Nix Helper)
 
 ## 📁 Repository Structure
 
@@ -18,10 +19,10 @@ The configuration follows a strictly modular structure:
 ```
 nixos-dotfiles/
 ├── flake.nix              # Entry point & dependency management
+├── Makefile               # Task automation using `nh`
 ├── hosts/                 # Host-specific configurations
-│   └── nixos-btw/        # Main host
-│       ├── default.nix    # NixOS entry point
-│       └── home.nix       # Home Manager entry point
+│   ├── nixos-btw/        # PC/Main host (NixOS configuration)
+│   └── mac-btw/          # MacBook Pro 14,1 host
 ├── modules/               # Reusable logic
 │   ├── nixos/            # System-level modules (Core, Services, Pkgs)
 │   └── home-manager/     # User-level modules (Shell, Niri, Apps)
@@ -33,15 +34,19 @@ nixos-dotfiles/
 This repository uses a special symlinking strategy for rapid iteration. Configuration files in `~/.config/` (like `niri/config.kdl`) are **out-of-store symlinks** pointing directly back to this repository.
 
 **Benefits:**
-- Change a keybind in `config/niri/config.kdl` and it applies **instantly** without a `nixos-rebuild`.
+- Change a keybind in `config/niri/config.kdl` and it applies **instantly** without a `nixos-rebuild` or `nh` activation.
 - Matugen can write to these files freely without being blocked by the read-only Nix store.
 
 ## 🚀 Getting Started
 
-To apply this configuration, run:
+To apply this configuration, you can use `nh` (Nix Helper) or the provided `Makefile`:
 
 ```bash
-sudo nixos-rebuild switch --flake .#nixos-btw
+# Using nh directly:
+nh os switch .#nixos-btw
+
+# Or using the Makefile wrapper:
+make switch
 ```
 
 *Note: Since this is a scratch build, a reboot or logout/login is recommended to initialize the DMS greeter and Nushell as your default shell.*

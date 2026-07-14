@@ -1,7 +1,6 @@
-{
-  pkgs,
-  lib,
-  ...
+{ pkgs
+, lib
+, ...
 }: {
   # Enable Niri
   programs.niri.enable = true;
@@ -75,8 +74,8 @@
   # Bluetooth MPRIS media control proxy
   systemd.user.services.mpris-proxy = {
     description = "Mpris proxy";
-    after = ["network.target" "sound.target"];
-    wantedBy = ["default.target"];
+    after = [ "network.target" "sound.target" ];
+    wantedBy = [ "default.target" ];
     serviceConfig.ExecStart = "${pkgs.bluez}/bin/mpris-proxy";
   };
 
@@ -122,8 +121,8 @@
   # Enable XDG Portal
   xdg.portal = {
     enable = true;
-    extraPortals = [pkgs.xdg-desktop-portal-gnome];
-    config.common.default = ["wlr" "gtk" "*"];
+    extraPortals = [ pkgs.xdg-desktop-portal-gnome ];
+    config.common.default = [ "wlr" "gtk" "*" ];
     wlr.enable = true;
   };
 }

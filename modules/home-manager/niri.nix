@@ -1,8 +1,8 @@
-{
-  config,
-  inputs,
-  ...
-}: let
+{ config
+, inputs
+, ...
+}:
+let
   dotfiles = "${config.home.homeDirectory}/nixos-dotfiles/config";
   create_symlink = path: config.lib.file.mkOutOfStoreSymlink path;
   configs = {
@@ -11,7 +11,8 @@
     qt5ct = "qt5ct";
     qt6ct = "qt6ct";
   };
-in {
+in
+{
   imports = [
     inputs.dms.homeModules.default
   ];
@@ -34,11 +35,11 @@ in {
   # Out-of-store symlink for configs
   xdg.configFile =
     builtins.mapAttrs
-    (name: subpath: {
-      source = create_symlink "${dotfiles}/${subpath}";
-      recursive = true;
-    })
-    configs;
+      (name: subpath: {
+        source = create_symlink "${dotfiles}/${subpath}";
+        recursive = true;
+      })
+      configs;
 
   # old way:
   #  xdg.configFile."niri/config.kdl".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nixos-dotfiles/config/niri/config.kdl";

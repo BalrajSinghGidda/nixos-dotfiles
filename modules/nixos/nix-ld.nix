@@ -1,5 +1,5 @@
 # nix-ld.nix
-{pkgs, ...}: {
+{ pkgs, ... }: {
   programs.nix-ld = {
     enable = true;
 

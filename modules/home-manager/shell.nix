@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{ pkgs, ... }: {
   programs.nushell = {
     enable = true;
     # Custom shell aliases

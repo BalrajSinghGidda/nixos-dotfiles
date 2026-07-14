@@ -29,76 +29,75 @@
     };
   };
 
-  outputs = {
-    self,
-    nixpkgs,
-    nvf,
-    home-manager,
-    dms,
-    nix-alien,
-    nixos-hardware,
-    danksearch,
-    ...
-  } @ inputs: {
-    nixosConfigurations.nixos-btw = nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
-      specialArgs = {inherit inputs;};
-      modules = [
-        ./hosts/nixos-btw/default.nix
-        nixos-hardware.nixosModules.dell-latitude-7490
-        dms.nixosModules.greeter # Enable DMS login system
+  outputs =
+    { self
+    , nixpkgs
+    , nvf
+    , home-manager
+    , dms
+    , nix-alien
+    , nixos-hardware
+    , danksearch
+    , ...
+    } @ inputs: {
+      nixosConfigurations.nixos-btw = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = { inherit inputs; };
+        modules = [
+          ./hosts/nixos-btw/default.nix
+          dms.nixosModules.greeter # Enable DMS login system
 
-        nvf.nixosModules.default
+          nvf.nixosModules.default
 
-        # Add nix-alien to system packages
-        # Enables running unpatched binaries with automatic library detection
-        ({pkgs, ...}: {
-          environment.systemPackages = [
-            nix-alien.packages.x86_64-linux.nix-alien
-          ];
-        })
+          # Add nix-alien to system packages
+          # Enables running unpatched binaries with automatic library detection
+          ({ pkgs, ... }: {
+            environment.systemPackages = [
+              nix-alien.packages.x86_64-linux.nix-alien
+            ];
+          })
 
-        home-manager.nixosModules.home-manager
-        {
-          home-manager = {
-            useGlobalPkgs = true;
-            useUserPackages = true;
-            extraSpecialArgs = {inherit inputs;};
-            users.balraj = import ./hosts/nixos-btw/home.nix;
-            backupFileExtension = "backup";
-          };
-        }
-      ];
+          home-manager.nixosModules.home-manager
+          {
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              extraSpecialArgs = { inherit inputs; };
+              users.balraj = import ./hosts/nixos-btw/home.nix;
+              backupFileExtension = "backup";
+            };
+          }
+        ];
+      };
+      nixosConfigurations.mac-btw = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = { inherit inputs; };
+        modules = [
+          ./hosts/mac-btw/default.nix
+          nixos-hardware.nixosModules.apple-macbook-pro-14-1
+          dms.nixosModules.greeter # Enable DMS login system
+
+          nvf.nixosModules.default
+
+          # Add nix-alien to system packages
+          # Enables running unpatched binaries with automatic library detection
+          ({ pkgs, ... }: {
+            environment.systemPackages = [
+              nix-alien.packages.x86_64-linux.nix-alien
+            ];
+          })
+
+          home-manager.nixosModules.home-manager
+          {
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              extraSpecialArgs = { inherit inputs; };
+              users.balraj = import ./hosts/mac-btw/home.nix;
+              backupFileExtension = "backup";
+            };
+          }
+        ];
+      };
     };
-    nixosConfigurations.mac-btw = nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
-      specialArgs = {inherit inputs;};
-      modules = [
-        ./hosts/mac-btw/default.nix
-        nixos-hardware.nixosModules.apple-macbook-pro-14-1
-        dms.nixosModules.greeter # Enable DMS login system
-
-        nvf.nixosModules.default
-
-        # Add nix-alien to system packages
-        # Enables running unpatched binaries with automatic library detection
-        ({pkgs, ...}: {
-          environment.systemPackages = [
-            nix-alien.packages.x86_64-linux.nix-alien
-          ];
-        })
-
-        home-manager.nixosModules.home-manager
-        {
-          home-manager = {
-            useGlobalPkgs = true;
-            useUserPackages = true;
-            extraSpecialArgs = {inherit inputs;};
-            users.balraj = import ./hosts/nixos-btw/home.nix;
-            backupFileExtension = "backup";
-          };
-        }
-      ];
-    };
-  };
 }

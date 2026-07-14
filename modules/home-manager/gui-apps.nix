@@ -1,7 +1,6 @@
-{
-  pkgs,
-  inputs,
-  ...
+{ pkgs
+, inputs
+, ...
 }: {
   services.kdeconnect.enable = true;
   services.kdeconnect.indicator = true;

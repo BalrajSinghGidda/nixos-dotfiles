@@ -1,9 +1,9 @@
-{
-  inputs,
-  pkgs,
-  config,
-  ...
-}: let
+{ inputs
+, pkgs
+, config
+, ...
+}:
+let
   user = "balraj";
   uid = config.users.users.${user}.uid;
   lidAction = pkgs.writeShellScript "lid-action" ''
@@ -38,7 +38,8 @@
       run_niri_action power-on-monitors
     fi
   '';
-in {
+in
+{
   imports = [
     ./hardware-configuration.nix
     ../../modules/nixos
@@ -47,19 +48,19 @@ in {
 
   networking.hostName = "mac-btw";
 
-  boot.kernelParams = ["mem_sleep_default=s2idle"];
+  boot.kernelParams = [ "mem_sleep_default=s2idle" ];
 
   # Work around slow/unstable resume on some MBP14,1 NVMe controllers.
   systemd.services.disable-nvme-d3cold = {
     description = "Disable NVMe d3cold on MacBookPro14,1";
-    before = ["suspend.target"];
-    path = [pkgs.bash pkgs.coreutils];
+    before = [ "suspend.target" ];
+    path = [ pkgs.bash pkgs.coreutils ];
     serviceConfig = {
       Type = "oneshot";
       ExecStart = "${inputs.nixos-hardware}/apple/macbook-pro/14-1/disable-nvme-d3cold.sh";
       TimeoutSec = 0;
     };
-    wantedBy = ["multi-user.target" "suspend.target"];
+    wantedBy = [ "multi-user.target" "suspend.target" ];
   };
 
   services.logind.settings.Login = {

@@ -1,9 +1,9 @@
-{
-  config,
-  pkgs,
-  lib,
-  ...
-}: let
+{ config
+, pkgs
+, lib
+, ...
+}:
+let
   driverVersion = "ca3ff74436029a960d85018459e79dd97e08dfbe";
   snd-hda-cirrus = pkgs.stdenv.mkDerivation {
     pname = "snd-hda-cirrus";
@@ -16,18 +16,19 @@
       sha256 = "sha256-NKOkK9oQBJEwsfpG5fF/373qK8VSJa1XDIb6jrg/IWI=";
     };
 
-    hardeningDisable = ["pic"];
+    hardeningDisable = [ "pic" ];
     nativeBuildInputs = config.boot.kernelPackages.kernel.moduleBuildDependencies;
-    NIX_CFLAGS_COMPILE = ["-g" "-Wall" "-Wno-unused-variable" "-Wno-unused-function"];
+    NIX_CFLAGS_COMPILE = [ "-g" "-Wall" "-Wno-unused-variable" "-Wno-unused-function" ];
     makeFlags =
       # Patching out broken flags
       (
-        lib.filter (
-          f:
+        lib.filter
+          (
+            f:
             !(lib.hasPrefix "O=" f)
             && !(lib.hasPrefix "--eval=" f)
-        )
-        config.boot.kernelPackages.kernel.makeFlags
+          )
+          config.boot.kernelPackages.kernel.makeFlags
       )
       ++ [
         "INSTALL_MOD_PATH=${placeholder "out"}"
@@ -91,8 +92,9 @@
       ' > Makefile
     '';
 
-    meta = {platforms = lib.platforms.linux;};
+    meta = { platforms = lib.platforms.linux; };
   };
-in {
-  boot.extraModulePackages = [snd-hda-cirrus];
+in
+{
+  boot.extraModulePackages = [ snd-hda-cirrus ];
 }

@@ -1,8 +1,8 @@
-{
-  lib,
-  stdenv,
-  fetchurl,
-  p7zip,
+{ lib
+, stdenv
+, fetchurl
+, p7zip
+,
 }:
 stdenv.mkDerivation rec {
   pname = "apple-fonts";
@@ -28,7 +28,7 @@ stdenv.mkDerivation rec {
     sha256 = "sha256-HC7ttFJswPMm+Lfql49aQzdWR2osjFYHJTdgjtuI+PQ=";
   };
 
-  nativeBuildInputs = [p7zip];
+  nativeBuildInputs = [ p7zip ];
 
   sourceRoot = ".";
 

@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{ pkgs, ... }: {
   # Neovim configuration using nvf (Neovim configuration framework)
   # nvf provides a declarative way to configure Neovim within NixOS
   # This replaces the previous manual Lua-based configuration

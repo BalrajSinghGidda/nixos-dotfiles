@@ -32,6 +32,30 @@
   services.upower.enable = true;
   services.power-profiles-daemon.enable = true;
 
+  #  services.blocky = {
+  #    enable = true;
+  #    settings = {
+  #      ports.dns = 53; # Port for incoming DNS Queries.
+  #      upstreams.groups.default = [
+  #        "https://my.ublockdns.com/46k9yjt9"
+  #      ];
+  #      bootstrapDns = {
+  #        upstream = "https://one.one.one.one/dns-query";
+  #        ips = ["1.1.1.1" "1.0.0.1"];
+  #      };
+  #      blocking = {
+  #        denylists = {
+  #          ads = ["https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts"];
+  #          adult = ["https://blocklistproject.github.io/Lists/porn.txt"];
+  #        };
+  #        clientGroupsBlock = {
+  #          default = ["ads"];
+  #          kids-ipad = ["ads" "adult"];
+  #        };
+  #      };
+  #    };
+  #  };
+
   networking.firewall.allowedTCPPortRanges = [
     {
       from = 1714;
@@ -98,7 +122,7 @@
   # Enable XDG Portal
   xdg.portal = {
     enable = true;
-    extraPortals = [pkgs.xdg-desktop-portal-wlr];
+    extraPortals = [pkgs.xdg-desktop-portal-gnome];
     config.common.default = ["wlr" "gtk" "*"];
     wlr.enable = true;
   };

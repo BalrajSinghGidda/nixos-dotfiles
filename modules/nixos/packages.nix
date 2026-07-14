@@ -39,7 +39,10 @@ in {
     kdePackages.qt6ct
     upower
     bluez
-    epiphany
+    vivaldi
+    vlc
+    libreoffice
+    ntfs3g
   ];
 
   programs.kdeconnect = {
